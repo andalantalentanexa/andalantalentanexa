@@ -558,7 +558,7 @@ document.getElementById("dlBtn").addEventListener("click", function(){
 });
 document.getElementById("sendBtn").addEventListener("click", async function(){
   if(!pdfBlob) return;
-  var waLink = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(pdfText);
+  var waLink = "https://wa.me/6282162673232" + WA_NUMBER + "?text=" + encodeURIComponent(pdfText);
   var file = new File([pdfBlob], pdfName, {type:"application/pdf"});
   if(navigator.canShare && navigator.canShare({files:[file]})){
     try{
