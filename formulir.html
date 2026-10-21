@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulir Pendaftaran | LPK Andalan Talenta Nexa</title>
+<title>Formulir Pendaftaran Siswa | LPK Andalan Talenta Nexa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -37,6 +37,9 @@ a{color:inherit;}
 .burger-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
 .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,42,77,.5);z-index:998;}
 .nav-overlay.show{display:block;}
+@media(min-width:861px) and (max-width:1060px){
+  .nav-links a{padding:10px 11px;font-size:.88rem;}
+}
 @media(max-width:860px){
   .burger-btn{display:flex;}
   .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(82vw,330px);background:#fff;flex-direction:column;align-items:stretch;gap:8px;padding:88px 20px 24px;transform:translateX(100%);transition:transform .28s ease;z-index:1000;overflow-y:auto;box-shadow:-10px 0 30px rgba(0,42,77,.25);}
@@ -48,8 +51,6 @@ a{color:inherit;}
 .btn{display:inline-block;text-decoration:none;padding:15px 28px;border-radius:999px;font-weight:700;font-size:.96rem;font-family:inherit;transition:.18s;border:1.5px solid transparent;cursor:pointer;}
 .btn-navy{background:var(--navy);color:#fff;}
 .btn-navy:hover{background:var(--teal);}
-.btn-line{background:#fff;border-color:var(--navy);color:var(--navy);}
-.btn-line:hover{background:var(--navy);color:#fff;}
 .btn[disabled]{opacity:.6;cursor:wait;}
 
 /* HALAMAN FORMULIR */
@@ -81,10 +82,12 @@ a{color:inherit;}
 .field input,.field select,.field textarea{font-family:inherit;font-size:1rem;color:var(--navy);width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:12px;background:#fff;transition:border-color .15s;}
 .field textarea{min-height:92px;resize:vertical;}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(31,103,127,.18);}
+.same{display:flex;gap:10px;align-items:center;font-size:.88rem;color:var(--soft);font-weight:500;}
+.same input{width:18px;height:18px;accent-color:var(--navy);flex:none;}
 @media(max-width:620px){.grid2{grid-template-columns:1fr;}}
 
 /* PILIHAN PROGRAM */
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .opt{position:relative;}
 .opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;}
 .opt .card{display:block;height:100%;border:1.5px solid var(--line);border-radius:14px;padding:18px 18px 16px;transition:.15s;}
@@ -100,7 +103,7 @@ a{color:inherit;}
 .up-box{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;min-height:170px;padding:14px;border:1.5px dashed #aab4bf;border-radius:14px;cursor:pointer;transition:.15s;overflow:hidden;}
 .up-box:hover,.up input:focus-visible + .up-box{border-color:var(--teal);background:var(--tint);}
 .up-box b{font-weight:800;font-size:.95rem;}
-.up-box small{font-size:.8rem;color:var(--soft);}
+.up-box small{font-size:.8rem;color:var(--soft);word-break:break-all;}
 .up-box .thumb{display:none;max-width:100%;max-height:96px;border-radius:8px;object-fit:contain;margin-bottom:4px;}
 .up.has .up-box{border-style:solid;border-color:var(--teal);}
 .up.has .thumb{display:block;}
@@ -147,6 +150,7 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
       <a href="index.html#tentang">Tentang</a>
       <a href="index.html#program">Program</a>
       <a href="index.html#alur">Alur Belajar</a>
+      <a href="index.html#prosedur">Prosedur</a>
       <a href="index.html#kontak">Kontak</a>
       <a href="formulir.html" class="nav-cta">Isi Formulir</a>
     </div>
@@ -157,12 +161,12 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 <main class="page">
   <aside class="side">
     <p class="crumb"><a href="index.html">Beranda</a> / Formulir Pendaftaran</p>
-    <h1>Formulir Pendaftaran</h1>
+    <h1>Formulir Pendaftaran Siswa</h1>
     <p>Lengkapi data dengan benar dan sesuai dokumen resmi. Setelah selesai, formulir dijadikan PDF lalu kamu kirim ke WhatsApp admin kami.</p>
 
     <h2>Alur pendaftaran</h2>
     <ol class="flow">
-      <li>Isi data diri dan pilih program</li>
+      <li>Isi identitas siswa dan orang tua atau wali</li>
       <li>Unggah foto KTP, ijazah, dan pas foto</li>
       <li>Klik Buat PDF, lalu Kirim ke WhatsApp</li>
       <li>Tim kami menghubungi kamu untuk langkah berikutnya</li>
@@ -177,50 +181,56 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
   <form id="regForm" novalidate>
     <section class="fsec">
       <span class="step-no">01</span>
-      <h2>Data Diri</h2>
+      <h2>Identitas Siswa</h2>
       <p class="note">Isi sesuai dengan dokumen identitas resmi (KTP/KK).</p>
       <div class="grid2">
         <div class="field full"><label for="nama">Nama Lengkap <i>*</i></label><input id="nama" name="nama" type="text" autocomplete="name" required></div>
-        <div class="field"><label for="tglLahir">Tanggal Lahir <i>*</i></label><input id="tglLahir" name="tglLahir" type="date" required></div>
         <div class="field"><label for="tmpLahir">Tempat Lahir <i>*</i></label><input id="tmpLahir" name="tmpLahir" type="text" required></div>
+        <div class="field"><label for="tglLahir">Tanggal Lahir <i>*</i></label><input id="tglLahir" name="tglLahir" type="date" required></div>
         <div class="field"><label for="jk">Jenis Kelamin <i>*</i></label>
           <select id="jk" name="jk" required><option value="">Pilih salah satu</option><option>Laki-laki</option><option>Perempuan</option></select></div>
-        <div class="field"><label for="pend">Pendidikan Terakhir <i>*</i></label>
-          <select id="pend" name="pend" required><option value="">Pilih salah satu</option><option>SMP</option><option>SMA / SMK</option><option>Diploma</option><option>S1</option></select></div>
-        <div class="field full"><label for="alamat">Alamat Domisili <i>*</i></label><textarea id="alamat" name="alamat" required></textarea></div>
-        <div class="field"><label for="wa">Nomor WhatsApp <i>*</i></label><input id="wa" name="wa" type="tel" inputmode="tel" autocomplete="tel" placeholder="0821 6267 3232" pattern="[0-9+\s\-]{9,18}" required></div>
+        <div class="field"><label for="agama">Agama <i>*</i></label>
+          <select id="agama" name="agama" required><option value="">Pilih salah satu</option><option>Islam</option><option>Kristen</option><option>Katolik</option><option>Hindu</option><option>Buddha</option><option>Konghucu</option></select></div>
+        <div class="field full"><label for="alamat">Alamat Lengkap <i>*</i></label><textarea id="alamat" name="alamat" autocomplete="street-address" required></textarea></div>
+        <div class="field"><label for="wa">No. Telp / HP <i>*</i></label><input id="wa" name="wa" type="tel" inputmode="tel" autocomplete="tel" placeholder="0821 6267 3232" pattern="[0-9+\s\-]{9,18}" required></div>
         <div class="field"><label for="email">Email <i>*</i></label><input id="email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field full"><label for="pend">Pendidikan Terakhir <i>*</i></label>
+          <select id="pend" name="pend" required><option value="">Pilih salah satu</option><option>SD</option><option>SMP</option><option>SMA</option><option>SMK</option><option>Diploma</option><option>S1</option></select></div>
       </div>
     </section>
 
     <section class="fsec alt">
       <span class="step-no">02</span>
-      <h2>Program yang Diminati</h2>
+      <h2>Program yang Ingin Diikuti</h2>
       <p class="note">Pilih program yang ingin kamu ikuti.</p>
-      <div class="opts" role="radiogroup" aria-label="Program yang diminati">
-        <div class="opt"><input type="radio" name="program" id="p1" value="Belajar sampai matching job" required><label class="card" for="p1"><b>Belajar sampai matching job</b><span>Belajar dari dasar, pembekalan kerja, sampai dibantu bertemu perusahaan di Jepang.</span></label></div>
-        <div class="opt"><input type="radio" name="program" id="p2" value="Program lulus JFT" required><label class="card" for="p2"><b>Program lulus JFT</b><span>Fokus menyiapkan diri untuk ujian JFT-Basic.</span></label></div>
-      </div>
-      <div class="grid2">
-        <div class="field full"><label for="bahasa">Kemampuan Bahasa Jepang Saat Ini <i>*</i></label>
-          <select id="bahasa" name="bahasa" required>
-            <option value="">Pilih salah satu</option>
-            <option>Belum pernah belajar</option>
-            <option>Pemula (bisa huruf hiragana/katakana)</option>
-            <option>Sudah lulus JFT-Basic atau JLPT N5</option>
-            <option>JLPT N4 atau lebih tinggi</option>
-          </select></div>
+      <div class="opts" role="radiogroup" aria-label="Program yang ingin diikuti">
+        <div class="opt"><input type="radio" name="program" id="p1" value="Pelatihan Magang" required><label class="card" for="p1"><b>Pelatihan Magang</b><span>Belajar dari dasar, pembekalan kerja, sampai dibantu bertemu perusahaan di Jepang.</span></label></div>
+        <div class="opt"><input type="radio" name="program" id="p2" value="Program Lulus JFT" required><label class="card" for="p2"><b>Program Lulus JFT</b><span>Fokus menyiapkan diri untuk ujian JFT-Basic.</span></label></div>
       </div>
     </section>
 
     <section class="fsec">
       <span class="step-no">03</span>
+      <h2>Identitas Orang Tua / Wali</h2>
+      <p class="note">Isi data orang tua atau wali yang bisa dihubungi.</p>
+      <div class="grid2">
+        <div class="field"><label for="namaOrtu">Nama Orang Tua / Wali <i>*</i></label><input id="namaOrtu" name="namaOrtu" type="text" required></div>
+        <div class="field"><label for="kerjaOrtu">Pekerjaan <i>*</i></label><input id="kerjaOrtu" name="kerjaOrtu" type="text" required></div>
+        <div class="field full"><label for="alamatOrtu">Alamat Lengkap <i>*</i></label>
+          <textarea id="alamatOrtu" name="alamatOrtu" required></textarea>
+          <label class="same" for="sameAddr"><input type="checkbox" id="sameAddr"> Sama dengan alamat siswa</label></div>
+        <div class="field"><label for="hpOrtu">No. Telp / HP <i>*</i></label><input id="hpOrtu" name="hpOrtu" type="tel" inputmode="tel" placeholder="0812 3456 7890" pattern="[0-9+\s\-]{9,18}" required></div>
+      </div>
+    </section>
+
+    <section class="fsec alt">
+      <span class="step-no">04</span>
       <h2>Unggah Dokumen</h2>
-      <p class="note">Format foto JPG atau PNG. Ukuran foto akan dikecilkan otomatis agar PDF tidak terlalu besar. Dokumen ikut dimasukkan ke dalam PDF.</p>
+      <p class="note">Format foto JPG atau PNG. Ukuran foto akan dikecilkan otomatis agar PDF tidak terlalu besar. Dokumen ikut dimasukkan ke lampiran PDF.</p>
       <div class="ups">
         <div class="up" data-key="ktp">
           <input type="file" id="f-ktp" accept="image/png,image/jpeg">
-          <label class="up-box" for="f-ktp"><img class="thumb" alt=""><b>KTP</b><small class="hint">Klik untuk unggah</small></label>
+          <label class="up-box" for="f-ktp"><img class="thumb" alt=""><b>KTP / KK</b><small class="hint">Klik untuk unggah</small></label>
           <p class="err" aria-live="polite"></p>
         </div>
         <div class="up" data-key="ijazah">
@@ -235,7 +245,7 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
         </div>
       </div>
 
-      <label class="agree"><input type="checkbox" id="setuju" required><span>Saya menyatakan bahwa seluruh data yang saya isi adalah benar dan menyetujui data ini digunakan untuk proses pendaftaran dan seleksi oleh LPK Andalan Talenta Nexa.</span></label>
+      <label class="agree"><input type="checkbox" id="setuju" required><span>Dengan ini saya bersedia mengikuti pendidikan dan akan mematuhi segala peraturan serta ketentuan yang berlaku.</span></label>
       <p class="after">Data diproses di perangkatmu dan tidak disimpan di website. PDF baru terkirim setelah kamu sendiri mengirimnya lewat WhatsApp.</p>
 
       <p class="formErr" id="formErr" role="alert"></p>
@@ -259,9 +269,8 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 <script>
 /* ===== PENGATURAN ===== */
 var WA_NUMBER = "6282162673232";
-var WA_DISPLAY = "0821 6267 3232";
-var EMAIL = "andalantalentanexa@gmail.com";
-var LEMBAGA = "LPK ANDALAN TALENTA NEXA";
+var WA_DISPLAY = "0821-6267-3232";
+var KOTA = "Boyolali";
 
 /* ===== NAVBAR ===== */
 function toggleMobileNav(){
@@ -281,7 +290,7 @@ window.addEventListener("resize",function(){if(window.innerWidth>860){closeMobil
 
 /* ===== UNGGAH FOTO ===== */
 var docs = {ktp:null, ijazah:null, foto:null};
-var docLabel = {ktp:"KTP", ijazah:"Ijazah Terakhir", foto:"Pas Foto Terbaru"};
+var docLabel = {ktp:"KTP / KK", ijazah:"Ijazah Terakhir", foto:"Pas Foto Terbaru"};
 var MAX_BYTES = 15 * 1024 * 1024;
 
 function compressImage(file){
@@ -348,6 +357,17 @@ document.getElementById("tglLahir").max = new Date().toISOString().split("T")[0]
 function hideResult(){ result.classList.remove("show"); }
 form.addEventListener("input", hideResult);
 
+/* alamat orang tua sama dengan alamat siswa */
+var sameAddr = document.getElementById("sameAddr");
+var alamat = document.getElementById("alamat");
+var alamatOrtu = document.getElementById("alamatOrtu");
+function syncAddr(){ if(sameAddr.checked){ alamatOrtu.value = alamat.value; } }
+sameAddr.addEventListener("change", function(){
+  alamatOrtu.readOnly = sameAddr.checked;
+  syncAddr();
+});
+alamat.addEventListener("input", syncAddr);
+
 var BULAN = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
 function formatTanggal(iso){
   if(!iso) return "-";
@@ -383,15 +403,18 @@ form.addEventListener("submit", async function(e){
   var fd = new FormData(form);
   var data = {
     nama: fd.get("nama").trim(),
-    tgl: formatTanggal(fd.get("tglLahir")),
-    tempat: fd.get("tmpLahir").trim(),
+    ttl: fd.get("tmpLahir").trim() + ", " + formatTanggal(fd.get("tglLahir")),
     jk: fd.get("jk"),
-    pend: fd.get("pend"),
     alamat: fd.get("alamat").trim(),
     wa: fd.get("wa").trim(),
     email: fd.get("email").trim(),
+    agama: fd.get("agama"),
+    pend: fd.get("pend"),
     program: fd.get("program"),
-    bahasa: fd.get("bahasa")
+    namaOrtu: fd.get("namaOrtu").trim(),
+    kerjaOrtu: fd.get("kerjaOrtu").trim(),
+    alamatOrtu: fd.get("alamatOrtu").trim(),
+    hpOrtu: fd.get("hpOrtu").trim()
   };
 
   var btn = document.getElementById("makeBtn");
@@ -400,7 +423,7 @@ form.addEventListener("submit", async function(e){
     pdfBlob = await buildPdf(data);
     pdfName = "Formulir-NEXA-" + slug(data.nama) + ".pdf";
     pdfText = "Halo Admin LPK Andalan Talenta Nexa, saya " + data.nama +
-      " ingin mendaftar program \"" + data.program + "\". Berikut formulir pendaftaran saya dalam bentuk PDF.";
+      " ingin mendaftar program \"" + data.program + "\". Berikut formulir pendaftaran siswa saya dalam bentuk PDF.";
     document.getElementById("resultName").textContent = pdfName + " (" + Math.max(1, Math.round(pdfBlob.size/1024)) + " KB)";
     result.classList.add("show");
     result.scrollIntoView({behavior:"smooth", block:"center"});
@@ -438,109 +461,111 @@ function fitBox(w, h, maxW, maxH){
 async function buildPdf(d){
   var jsPDF = window.jspdf.jsPDF;
   var doc = new jsPDF({unit:"mm", format:"a4"});
-  var NAVY = [0,42,77], TEAL = [31,103,127], SOFT = [91,102,115], LINE = [227,231,236];
-  var M = 18, PW = 210, RIGHT = PW - M;
+  var M = 20, PW = 210, RIGHT = PW - M;
+  var BLACK = [0,0,0], GREY = [120,120,120];
   var logo = await loadLogo();
 
-  function header(){
-    var tx = M;
-    if(logo){
-      var lh = 16, lw = lh * logo.w / logo.h;
-      if(lw > 30){ lw = 30; lh = lw * logo.h / logo.w; }
-      doc.addImage(logo.data, "PNG", M, 9, lw, lh);
-      tx = M + lw + 4;
-    }
-    doc.setFont("helvetica","bold"); doc.setFontSize(14); doc.setTextColor.apply(doc, NAVY);
-    doc.text(LEMBAGA, tx, 16);
-    doc.setFont("helvetica","normal"); doc.setFontSize(9); doc.setTextColor.apply(doc, SOFT);
-    doc.text("Lembaga Pelatihan Kerja Bahasa Jepang", tx, 21);
-    doc.text("Boyolali, Jawa Tengah  |  " + WA_DISPLAY + "  |  " + EMAIL, tx, 25.5);
-    doc.setDrawColor.apply(doc, TEAL); doc.setLineWidth(0.6);
-    doc.line(M, 30, RIGHT, 30);
+  doc.setTextColor.apply(doc, BLACK);
+
+  /* KOP SURAT */
+  var tx = M;
+  if(logo){
+    var lh = 24, lw = lh * logo.w / logo.h;
+    if(lw > 34){ lw = 34; lh = lw * logo.h / logo.w; }
+    doc.addImage(logo.data, "PNG", M, 12 + (24 - lh) / 2, lw, lh);
+    tx = M + lw + 4;
   }
-  function footer(){
-    doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor.apply(doc, SOFT);
-    doc.text("Dokumen ini dibuat otomatis dari formulir online " + LEMBAGA + ".", PW/2, 288, {align:"center"});
+  var cx = (tx + RIGHT) / 2;
+  doc.setFont("times","bold"); doc.setFontSize(14);
+  doc.text("LEMBAGA PELATIHAN KERJA", cx, 20, {align:"center"});
+  doc.setFontSize(15);
+  doc.text("ANDALAN TALENTA NEXA", cx, 26.5, {align:"center"});
+  doc.setFont("times","normal"); doc.setFontSize(8.5);
+  doc.text("Sanggrahan, Donohudan, Kec. Ngemplak, Kab. Boyolali, Jawa Tengah", cx, 31.5, {align:"center"});
+  doc.text("Kode Pos 57375 HP " + WA_DISPLAY, cx, 35.5, {align:"center"});
+  doc.setLineWidth(0.9); doc.setDrawColor(0,0,0);
+  doc.line(M, 40, RIGHT, 40);
+
+  /* JUDUL */
+  doc.setFont("times","bold"); doc.setFontSize(11);
+  doc.text("FORMULIR PENDAFTARAN SISWA", PW / 2, 51, {align:"center"});
+
+  /* DAFTAR ISIAN */
+  var NUM_X = M + 3, LAB_X = M + 10, COL_X = M + 62, VAL_X = M + 66, VAL_W = RIGHT - VAL_X;
+  function heading(t, y){
+    doc.setFont("times","bold"); doc.setFontSize(10.5);
+    doc.text(t, M, y);
+    return y + 5.5;
   }
-  function sectionTitle(t, y){
-    doc.setFillColor.apply(doc, TEAL); doc.rect(M, y - 4, 1.6, 5.2, "F");
-    doc.setFont("helvetica","bold"); doc.setFontSize(10.5); doc.setTextColor.apply(doc, NAVY);
-    doc.text(t, M + 4, y);
-  }
-  function row(label, value, y, w){
-    var lines = doc.splitTextToSize(value || "-", w);
-    var h = lines.length * 4.7 + 3.6;
-    doc.setFont("helvetica","normal"); doc.setFontSize(9.5);
-    doc.setTextColor.apply(doc, SOFT); doc.text(label, M, y + 4);
-    doc.setTextColor.apply(doc, NAVY); doc.text(lines, M + 46, y + 4);
-    doc.setDrawColor.apply(doc, LINE); doc.setLineWidth(0.25);
-    doc.line(M, y + h, M + 46 + w, y + h);
-    return y + h;
+  function rows(items, y){
+    doc.setFont("times","normal"); doc.setFontSize(10.5);
+    items.forEach(function(it, i){
+      var lines = doc.splitTextToSize(it[1] || "-", VAL_W);
+      doc.text((i + 1) + ".", NUM_X, y);
+      doc.text(it[0], LAB_X, y);
+      doc.text(":", COL_X, y);
+      doc.text(lines, VAL_X, y);
+      y += lines.length * 4.9 + 1.7;
+    });
+    return y;
   }
 
-  /* HALAMAN 1 */
-  header();
-  doc.setFont("helvetica","bold"); doc.setFontSize(13); doc.setTextColor.apply(doc, NAVY);
-  doc.text("FORMULIR PENDAFTARAN", M, 41);
+  var y = 64;
+  y = heading("IDENTITAS SISWA", y);
+  y = rows([
+    ["Nama Lengkap", d.nama],
+    ["Tempat / Tanggal Lahir", d.ttl],
+    ["Jenis Kelamin", d.jk],
+    ["Alamat Lengkap", d.alamat],
+    ["No. Telp / HP", d.wa],
+    ["Email", d.email],
+    ["Agama", d.agama],
+    ["Pendidikan Terakhir", d.pend],
+    ["Program Yang Ingin Diikuti", d.program]
+  ], y);
+
+  y += 3;
+  y = heading("IDENTITAS ORANG TUA / WALI", y);
+  y = rows([
+    ["Nama Orang Tua / Wali", d.namaOrtu],
+    ["Pekerjaan", d.kerjaOrtu],
+    ["Alamat Lengkap", d.alamatOrtu],
+    ["No. Telp / HP", d.hpOrtu]
+  ], y);
+
+  /* PERNYATAAN */
+  y += 8;
+  doc.setFont("times","normal"); doc.setFontSize(10.5);
+  var stmt = doc.splitTextToSize("Dengan ini saya bersedia mengikuti pendidikan dan akan mematuhi segala peraturan serta ketentuan yang berlaku.", RIGHT - M);
+  doc.text(stmt, M, y);
+  y += stmt.length * 5 + 16;
+
+  /* TANGGAL DAN NAMA */
   var now = new Date();
-  doc.setFont("helvetica","normal"); doc.setFontSize(9); doc.setTextColor.apply(doc, SOFT);
-  doc.text("Tanggal pengisian: " + now.getDate() + " " + BULAN[now.getMonth()] + " " + now.getFullYear(), RIGHT, 41, {align:"right"});
-
-  /* pas foto */
-  var px = RIGHT - 34, py = 48;
-  doc.setDrawColor.apply(doc, LINE); doc.setLineWidth(0.4);
-  doc.rect(px, py, 34, 44);
-  var f = fitBox(docs.foto.w, docs.foto.h, 34, 44);
-  doc.addImage(docs.foto.data, "JPEG", px + (34 - f.w)/2, py + (44 - f.h)/2, f.w, f.h);
-
-  var y = 54;
-  sectionTitle("A. Data Diri", y); y += 3;
-  y = row("Nama Lengkap", d.nama, y, 84);
-  y = row("Tempat, Tanggal Lahir", d.tempat + ", " + d.tgl, y, 84);
-  y = row("Jenis Kelamin", d.jk, y, 84);
-  y = row("Pendidikan Terakhir", d.pend, y, 84);
-  y = row("Alamat Domisili", d.alamat, y, 84);
-  y = row("Nomor WhatsApp", d.wa, y, 84);
-  y = row("Email", d.email, y, 84);
-
-  y = Math.max(y, 96) + 9;
-  sectionTitle("B. Program yang Diminati", y); y += 3;
-  y = row("Program", d.program, y, 126);
-  y = row("Kemampuan Bahasa Jepang", d.bahasa, y, 126);
-
-  y += 9;
-  sectionTitle("C. Pernyataan", y); y += 4;
-  doc.setFont("helvetica","normal"); doc.setFontSize(9.5); doc.setTextColor.apply(doc, NAVY);
-  var stmt = doc.splitTextToSize("Saya menyatakan bahwa seluruh data yang saya isi pada formulir ini adalah benar dan menyetujui data ini digunakan untuk proses pendaftaran dan seleksi oleh " + LEMBAGA + ".", RIGHT - M);
-  doc.text(stmt, M, y + 3);
-  y += stmt.length * 4.7 + 10;
-
-  doc.text("Pendaftar,", RIGHT - 60, y);
-  doc.setDrawColor.apply(doc, NAVY); doc.setLineWidth(0.3);
-  doc.line(RIGHT - 60, y + 26, RIGHT, y + 26);
-  doc.setFont("helvetica","bold");
-  doc.text(d.nama, RIGHT - 60, y + 31);
-  footer();
+  var tgl = KOTA + ", " + now.getDate() + " " + BULAN[now.getMonth()] + " " + now.getFullYear();
+  doc.text(tgl, RIGHT, y, {align:"right"});
+  y += 34;
+  doc.text(d.nama, RIGHT, y, {align:"right"});
 
   /* HALAMAN 2 : LAMPIRAN */
   doc.addPage();
-  header();
-  doc.setFont("helvetica","bold"); doc.setFontSize(13); doc.setTextColor.apply(doc, NAVY);
-  doc.text("LAMPIRAN DOKUMEN", M, 41);
-  doc.setFont("helvetica","normal"); doc.setFontSize(9); doc.setTextColor.apply(doc, SOFT);
-  doc.text("Nama: " + d.nama, RIGHT, 41, {align:"right"});
+  doc.setFont("times","bold"); doc.setFontSize(12);
+  doc.text("LAMPIRAN DOKUMEN", M, 22);
+  doc.setFont("times","normal"); doc.setFontSize(10.5);
+  doc.text("Nama: " + d.nama, RIGHT, 22, {align:"right"});
+  doc.setLineWidth(0.5); doc.line(M, 26, RIGHT, 26);
 
-  function attach(label, img, top, maxH){
-    sectionTitle(label, top);
-    var boxW = RIGHT - M;
-    doc.setDrawColor.apply(doc, LINE); doc.setLineWidth(0.4);
-    doc.rect(M, top + 3, boxW, maxH);
-    var s = fitBox(img.w, img.h, boxW - 6, maxH - 6);
-    doc.addImage(img.data, "JPEG", M + (boxW - s.w)/2, top + 3 + (maxH - s.h)/2, s.w, s.h);
+  function attach(label, img, x, top, w, h){
+    doc.setFont("times","bold"); doc.setFontSize(10.5); doc.setTextColor(0,0,0);
+    doc.text(label, x, top);
+    doc.setDrawColor(GREY[0], GREY[1], GREY[2]); doc.setLineWidth(0.3);
+    doc.rect(x, top + 2.5, w, h);
+    var s = fitBox(img.w, img.h, w - 4, h - 4);
+    doc.addImage(img.data, "JPEG", x + (w - s.w) / 2, top + 2.5 + (h - s.h) / 2, s.w, s.h);
   }
-  attach("KTP", docs.ktp, 54, 100);
-  attach("Ijazah Terakhir", docs.ijazah, 168, 106);
-  footer();
+  attach("KTP / KK", docs.ktp, M, 36, 112, 74);
+  attach("Pas Foto Terbaru", docs.foto, M + 118, 36, 52, 74);
+  attach("Ijazah Terakhir", docs.ijazah, M, 122, RIGHT - M, 140);
 
   return doc.output("blob");
 }
@@ -558,7 +583,7 @@ document.getElementById("dlBtn").addEventListener("click", function(){
 });
 document.getElementById("sendBtn").addEventListener("click", async function(){
   if(!pdfBlob) return;
-  var waLink = "https://wa.me/6282162673232" + WA_NUMBER + "?text=" + encodeURIComponent(pdfText);
+  var waLink = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(pdfText);
   var file = new File([pdfBlob], pdfName, {type:"application/pdf"});
   if(navigator.canShare && navigator.canShare({files:[file]})){
     try{
