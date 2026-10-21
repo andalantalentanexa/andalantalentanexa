@@ -9,6 +9,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+/* ===== LOGO =====
+   Urutan pemakaian logo:
+   1. LOGO_DATA  : kalau diisi (tempel kode base64 logo asli di antara tanda kutip), ini yang dipakai.
+   2. logo.png   : file logo di folder yang sama dengan halaman ini.
+   3. LOGO_FALLBACK : logo huruf N bawaan, dipakai kalau dua di atas tidak ada. */
+var LOGO_DATA = "";
+var LOGO_FALLBACK = "data:image/svg+xml;utf8," + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 100 100">' +
+  '<polygon points="8,14 30,14 30,86 8,86" fill="#002a4d"/>' +
+  '<polygon points="8,14 30,14 74,86 52,86" fill="#002a4d"/>' +
+  '<polygon points="74,14 94,14 94,86 74,86" fill="#1f677f"/></svg>'
+);
+</script>
 <style>
 :root{--navy:#002a4d;--teal:#1f677f;--soft:#5b6673;--line:#e3e7ec;--tint:#f6f7f9;--white:#fff;--err:#b42318;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -82,8 +96,8 @@ a{color:inherit;}
 .field input,.field select,.field textarea{font-family:inherit;font-size:1rem;color:var(--navy);width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:12px;background:#fff;transition:border-color .15s;}
 .field textarea{min-height:92px;resize:vertical;}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(31,103,127,.18);}
-.same{display:flex;gap:10px;align-items:center;font-size:.88rem;color:var(--soft);font-weight:500;}
-.same input{width:18px;height:18px;accent-color:var(--navy);flex:none;}
+.field .same{display:flex;gap:10px;align-items:center;font-size:.88rem;color:var(--soft);font-weight:500;}
+.field .same input{width:18px;height:18px;padding:0;accent-color:var(--navy);flex:none;}
 @media(max-width:620px){.grid2{grid-template-columns:1fr;}}
 
 /* PILIHAN PROGRAM */
@@ -99,6 +113,7 @@ a{color:inherit;}
 
 /* UNGGAH DOKUMEN */
 .ups{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.up{position:relative;}
 .up input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
 .up-box{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;min-height:170px;padding:14px;border:1.5px dashed #aab4bf;border-radius:14px;cursor:pointer;transition:.15s;overflow:hidden;}
 .up-box:hover,.up input:focus-visible + .up-box{border-color:var(--teal);background:var(--tint);}
@@ -137,7 +152,7 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 <nav id="navbar">
   <div class="navbar-inner">
     <a href="index.html#beranda" class="brand">
-      <img src="logo.png" alt="Logo Andalan Talenta Nexa" onerror="this.style.display='none'">
+      <img id="navLogo" src="logo.png" alt="Logo Andalan Talenta Nexa" onerror="this.onerror=null;this.src=LOGO_FALLBACK">
       <span class="brand-text"><b>Andalan Talenta Nexa</b><span>LPK Bahasa Jepang</span></span>
     </a>
 
@@ -271,6 +286,9 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 var WA_NUMBER = "6282162673232";
 var WA_DISPLAY = "0821-6267-3232";
 var KOTA = "Boyolali";
+
+/* ===== LOGO NAVBAR ===== */
+if (LOGO_DATA) { document.getElementById("navLogo").src = LOGO_DATA; }
 
 /* ===== NAVBAR ===== */
 function toggleMobileNav(){
@@ -437,20 +455,35 @@ form.addEventListener("submit", async function(e){
 });
 
 /* ===== PEMBUAT PDF ===== */
-function loadLogo(){
+/* Mencoba satu sumber gambar, hasilnya PNG data URL atau null kalau gagal */
+function tryLoadImage(src){
   return new Promise(function(resolve){
     var im = new Image();
     im.onload = function(){
       try{
+        var w = im.naturalWidth || 300, h = im.naturalHeight || 300;
         var c = document.createElement("canvas");
-        c.width = im.naturalWidth; c.height = im.naturalHeight;
-        c.getContext("2d").drawImage(im, 0, 0);
-        resolve({data: c.toDataURL("image/png"), w: im.naturalWidth, h: im.naturalHeight});
+        c.width = w; c.height = h;
+        c.getContext("2d").drawImage(im, 0, 0, w, h);
+        resolve({data: c.toDataURL("image/png"), w: w, h: h});
       }catch(e){ resolve(null); }
     };
     im.onerror = function(){ resolve(null); };
-    im.src = "logo.png";
+    im.src = src;
   });
+}
+
+/* Urutan: LOGO_DATA, logo.png, lalu logo bawaan. Logo di PDF selalu terisi. */
+async function loadLogo(){
+  var sources = [];
+  if(LOGO_DATA) sources.push(LOGO_DATA);
+  sources.push("logo.png");
+  sources.push(LOGO_FALLBACK);
+  for(var i = 0; i < sources.length; i++){
+    var r = await tryLoadImage(sources[i]);
+    if(r) return r;
+  }
+  return null;
 }
 
 function fitBox(w, h, maxW, maxH){
@@ -462,10 +495,10 @@ async function buildPdf(d){
   var jsPDF = window.jspdf.jsPDF;
   var doc = new jsPDF({unit:"mm", format:"a4"});
   var M = 20, PW = 210, RIGHT = PW - M;
-  var BLACK = [0,0,0], GREY = [120,120,120];
+  var GREY = [120,120,120];
   var logo = await loadLogo();
 
-  doc.setTextColor.apply(doc, BLACK);
+  doc.setTextColor(0,0,0);
 
   /* KOP SURAT */
   var tx = M;
@@ -553,7 +586,8 @@ async function buildPdf(d){
   doc.text("LAMPIRAN DOKUMEN", M, 22);
   doc.setFont("times","normal"); doc.setFontSize(10.5);
   doc.text("Nama: " + d.nama, RIGHT, 22, {align:"right"});
-  doc.setLineWidth(0.5); doc.line(M, 26, RIGHT, 26);
+  doc.setLineWidth(0.5); doc.setDrawColor(0,0,0);
+  doc.line(M, 26, RIGHT, 26);
 
   function attach(label, img, x, top, w, h){
     doc.setFont("times","bold"); doc.setFontSize(10.5); doc.setTextColor(0,0,0);
