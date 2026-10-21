@@ -98,6 +98,7 @@ a{color:inherit;}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(31,103,127,.18);}
 .field .same{display:flex;gap:10px;align-items:center;font-size:.88rem;color:var(--soft);font-weight:500;}
 .field .same input{width:18px;height:18px;padding:0;accent-color:var(--navy);flex:none;}
+#nama{text-transform:uppercase;}
 @media(max-width:620px){.grid2{grid-template-columns:1fr;}}
 
 /* PILIHAN PROGRAM */
@@ -420,7 +421,7 @@ form.addEventListener("submit", async function(e){
 
   var fd = new FormData(form);
   var data = {
-    nama: fd.get("nama").trim(),
+    nama: fd.get("nama").trim().toUpperCase(),
     ttl: fd.get("tmpLahir").trim() + ", " + formatTanggal(fd.get("tglLahir")),
     jk: fd.get("jk"),
     alamat: fd.get("alamat").trim(),
@@ -631,6 +632,7 @@ document.getElementById("sendBtn").addEventListener("click", async function(){
   window.open(waLink, "_blank", "noopener");
 });
 </script>
+
 
 </body>
 </html>
