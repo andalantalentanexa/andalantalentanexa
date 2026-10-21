@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulir Pendaftaran | LPK Andalan Talenta Nexa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{--navy:#002a4d;--teal:#1f677f;--soft:#5b6673;--line:#e3e7ec;--tint:#f6f7f9;--white:#fff;--err:#b42318;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:90px;}
+body{font-family:"Plus Jakarta Sans","Segoe UI",sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden;line-height:1.65;}
+a{color:inherit;}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;}
+
+/* NAVBAR */
+#navbar{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);}
+.navbar-inner{max-width:1160px;margin:0 auto;min-height:72px;padding:8px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;}
+.brand img{height:44px;width:auto;display:block;}
+.brand-text{display:flex;flex-direction:column;line-height:1.15;}
+.brand-text b{font-weight:800;font-size:1.02rem;}
+.brand-text span{font-size:.72rem;color:var(--soft);}
+.nav-links{display:flex;align-items:center;gap:4px;}
+.nav-links a{text-decoration:none;font-weight:700;font-size:.92rem;padding:10px 15px;border-radius:999px;}
+.nav-links a:hover{background:var(--tint);}
+.nav-links a.nav-cta{background:var(--navy);color:#fff;margin-left:8px;}
+.nav-links a.nav-cta:hover{background:var(--teal);}
+.burger-btn{display:none;flex:none;width:46px;height:46px;border:2px solid var(--navy);border-radius:50%;background:#fff;cursor:pointer;align-items:center;justify-content:center;gap:4px;flex-direction:column;position:relative;z-index:1001;}
+.burger-btn span{display:block;width:20px;height:2px;background:var(--navy);border-radius:2px;transition:.25s ease;}
+.burger-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.burger-btn.open span:nth-child(2){opacity:0;}
+.burger-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,42,77,.5);z-index:998;}
+.nav-overlay.show{display:block;}
+@media(max-width:860px){
+  .burger-btn{display:flex;}
+  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(82vw,330px);background:#fff;flex-direction:column;align-items:stretch;gap:8px;padding:88px 20px 24px;transform:translateX(100%);transition:transform .28s ease;z-index:1000;overflow-y:auto;box-shadow:-10px 0 30px rgba(0,42,77,.25);}
+  .nav-links.mobileOpen{transform:translateX(0);}
+  .nav-links a{padding:15px 18px;font-size:1rem;border-radius:14px;background:var(--tint);}
+  .nav-links a.nav-cta{margin:10px 0 0;text-align:center;background:var(--navy);}
+}
+
+.btn{display:inline-block;text-decoration:none;padding:15px 28px;border-radius:999px;font-weight:700;font-size:.96rem;font-family:inherit;transition:.18s;border:1.5px solid transparent;cursor:pointer;}
+.btn-navy{background:var(--navy);color:#fff;}
+.btn-navy:hover{background:var(--teal);}
+.btn-line{background:#fff;border-color:var(--navy);color:var(--navy);}
+.btn-line:hover{background:var(--navy);color:#fff;}
+.btn[disabled]{opacity:.6;cursor:wait;}
+
+/* HALAMAN FORMULIR */
+.page{max-width:1160px;margin:0 auto;padding:64px 22px 0;display:grid;grid-template-columns:.7fr 1.3fr;gap:64px;align-items:start;}
+.crumb{font-size:.85rem;color:var(--soft);margin-bottom:14px;}
+.crumb a{text-decoration:none;border-bottom:1.5px solid var(--teal);}
+.side h1{font-weight:800;font-size:clamp(2rem,4.4vw,3rem);line-height:1.1;letter-spacing:-.02em;margin-bottom:16px;}
+.side > p{color:var(--soft);max-width:420px;margin-bottom:34px;}
+.side h2{font-weight:800;font-size:1.1rem;margin-bottom:12px;}
+.flow{list-style:none;counter-reset:f;border-top:1px solid var(--line);margin-bottom:30px;}
+.flow li{counter-increment:f;position:relative;padding:14px 0 14px 46px;border-bottom:1px solid var(--line);font-size:.95rem;}
+.flow li::before{content:counter(f);position:absolute;left:0;top:12px;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--navy);font-weight:800;font-size:.85rem;display:grid;place-items:center;}
+.help{font-size:.95rem;color:var(--soft);}
+.help b{color:var(--navy);}
+.help a{text-decoration:none;border-bottom:1.5px solid var(--teal);}
+@media(min-width:861px){.side{position:sticky;top:96px;}}
+@media(max-width:860px){.page{grid-template-columns:1fr;gap:36px;padding-top:44px;}}
+
+.fsec{border-top:3px solid var(--navy);padding-top:22px;margin-bottom:48px;}
+.fsec.alt{border-top-color:var(--teal);}
+.fsec h2{font-weight:800;font-size:1.45rem;line-height:1.3;margin-bottom:4px;}
+.fsec .note{color:var(--soft);font-size:.93rem;margin-bottom:22px;}
+.step-no{font-weight:800;font-size:.85rem;color:var(--teal);margin-bottom:4px;display:block;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px 18px;}
+.field{display:flex;flex-direction:column;gap:6px;}
+.field.full{grid-column:1 / -1;}
+.field label,.field .lbl{font-weight:700;font-size:.9rem;}
+.field label i,.field .lbl i{color:var(--err);font-style:normal;}
+.field input,.field select,.field textarea{font-family:inherit;font-size:1rem;color:var(--navy);width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:12px;background:#fff;transition:border-color .15s;}
+.field textarea{min-height:92px;resize:vertical;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(31,103,127,.18);}
+@media(max-width:620px){.grid2{grid-template-columns:1fr;}}
+
+/* PILIHAN PROGRAM */
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;}
+.opt{position:relative;}
+.opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;}
+.opt .card{display:block;height:100%;border:1.5px solid var(--line);border-radius:14px;padding:18px 18px 16px;transition:.15s;}
+.opt .card b{display:block;font-weight:800;margin-bottom:4px;}
+.opt .card span{display:block;font-size:.88rem;color:var(--soft);}
+.opt input:checked + .card{border-color:var(--navy);background:var(--tint);box-shadow:inset 0 0 0 1px var(--navy);}
+.opt input:focus-visible + .card{outline:3px solid var(--teal);outline-offset:2px;}
+@media(max-width:620px){.opts{grid-template-columns:1fr;}}
+
+/* UNGGAH DOKUMEN */
+.ups{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.up input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
+.up-box{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;min-height:170px;padding:14px;border:1.5px dashed #aab4bf;border-radius:14px;cursor:pointer;transition:.15s;overflow:hidden;}
+.up-box:hover,.up input:focus-visible + .up-box{border-color:var(--teal);background:var(--tint);}
+.up-box b{font-weight:800;font-size:.95rem;}
+.up-box small{font-size:.8rem;color:var(--soft);}
+.up-box .thumb{display:none;max-width:100%;max-height:96px;border-radius:8px;object-fit:contain;margin-bottom:4px;}
+.up.has .up-box{border-style:solid;border-color:var(--teal);}
+.up.has .thumb{display:block;}
+.up .err{min-height:1.2em;font-size:.82rem;color:var(--err);margin-top:6px;}
+@media(max-width:700px){.ups{grid-template-columns:1fr;}.up-box{min-height:130px;}}
+
+.agree{display:flex;gap:12px;align-items:flex-start;margin:26px 0 8px;font-size:.93rem;}
+.agree input{width:20px;height:20px;margin-top:3px;flex:none;accent-color:var(--navy);}
+.after{font-size:.88rem;color:var(--soft);margin-bottom:20px;}
+.formErr{display:none;margin:0 0 16px;padding:14px 16px;border-radius:12px;background:#fdeceb;color:var(--err);font-weight:700;font-size:.92rem;}
+.formErr.show{display:block;}
+
+/* HASIL PDF */
+.result{display:none;margin-top:30px;background:var(--navy);color:#fff;border-radius:24px;padding:34px 32px;}
+.result.show{display:block;}
+.result h3{font-weight:800;font-size:1.4rem;line-height:1.25;margin-bottom:8px;}
+.result p{color:#b9cde0;font-size:.95rem;margin-bottom:20px;max-width:520px;}
+.result .acts{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;}
+.result .btn-white{background:#fff;color:var(--navy);}
+.result .btn-white:hover{background:#dfe9f0;}
+.result .btn-ghost{background:transparent;border-color:#6f8aa3;color:#fff;}
+.result .btn-ghost:hover{background:#fff;color:var(--navy);}
+.result .tip{font-size:.85rem;color:#b9cde0;margin:0;}
+
+footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padding:30px 20px;border-top:1px solid var(--line);}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;}}
+</style>
+</head>
+<body translate="no">
+
+<nav id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html#beranda" class="brand">
+      <img src="logo.png" alt="Logo Andalan Talenta Nexa" onerror="this.style.display='none'">
+      <span class="brand-text"><b>Andalan Talenta Nexa</b><span>LPK Bahasa Jepang</span></span>
+    </a>
+
+    <button class="burger-btn" id="burgerBtn" type="button" aria-label="Buka menu" aria-expanded="false" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#beranda">Beranda</a>
+      <a href="index.html#tentang">Tentang</a>
+      <a href="index.html#program">Program</a>
+      <a href="index.html#alur">Alur Belajar</a>
+      <a href="index.html#kontak">Kontak</a>
+      <a href="formulir.html" class="nav-cta">Isi Formulir</a>
+    </div>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
+</nav>
+
+<main class="page">
+  <aside class="side">
+    <p class="crumb"><a href="index.html">Beranda</a> / Formulir Pendaftaran</p>
+    <h1>Formulir Pendaftaran</h1>
+    <p>Lengkapi data dengan benar dan sesuai dokumen resmi. Setelah selesai, formulir dijadikan PDF lalu kamu kirim ke WhatsApp admin kami.</p>
+
+    <h2>Alur pendaftaran</h2>
+    <ol class="flow">
+      <li>Isi data diri dan pilih program</li>
+      <li>Unggah foto KTP, ijazah, dan pas foto</li>
+      <li>Klik Buat PDF, lalu Kirim ke WhatsApp</li>
+      <li>Tim kami menghubungi kamu untuk langkah berikutnya</li>
+    </ol>
+
+    <p class="help"><b>Butuh bantuan?</b><br>
+      WhatsApp: <a href="https://wa.me/6282162673232">0821 6267 3232</a><br>
+      Email: <a href="mailto:andalantalentanexa@gmail.com">andalantalentanexa@gmail.com</a>
+    </p>
+  </aside>
+
+  <form id="regForm" novalidate>
+    <section class="fsec">
+      <span class="step-no">01</span>
+      <h2>Data Diri</h2>
+      <p class="note">Isi sesuai dengan dokumen identitas resmi (KTP/KK).</p>
+      <div class="grid2">
+        <div class="field full"><label for="nama">Nama Lengkap <i>*</i></label><input id="nama" name="nama" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="tglLahir">Tanggal Lahir <i>*</i></label><input id="tglLahir" name="tglLahir" type="date" required></div>
+        <div class="field"><label for="tmpLahir">Tempat Lahir <i>*</i></label><input id="tmpLahir" name="tmpLahir" type="text" required></div>
+        <div class="field"><label for="jk">Jenis Kelamin <i>*</i></label>
+          <select id="jk" name="jk" required><option value="">Pilih salah satu</option><option>Laki-laki</option><option>Perempuan</option></select></div>
+        <div class="field"><label for="pend">Pendidikan Terakhir <i>*</i></label>
+          <select id="pend" name="pend" required><option value="">Pilih salah satu</option><option>SMP</option><option>SMA / SMK</option><option>Diploma</option><option>S1</option></select></div>
+        <div class="field full"><label for="alamat">Alamat Domisili <i>*</i></label><textarea id="alamat" name="alamat" required></textarea></div>
+        <div class="field"><label for="wa">Nomor WhatsApp <i>*</i></label><input id="wa" name="wa" type="tel" inputmode="tel" autocomplete="tel" placeholder="0821 6267 3232" pattern="[0-9+\s\-]{9,18}" required></div>
+        <div class="field"><label for="email">Email <i>*</i></label><input id="email" name="email" type="email" autocomplete="email" required></div>
+      </div>
+    </section>
+
+    <section class="fsec alt">
+      <span class="step-no">02</span>
+      <h2>Program yang Diminati</h2>
+      <p class="note">Pilih program yang ingin kamu ikuti.</p>
+      <div class="opts" role="radiogroup" aria-label="Program yang diminati">
+        <div class="opt"><input type="radio" name="program" id="p1" value="Belajar sampai matching job" required><label class="card" for="p1"><b>Belajar sampai matching job</b><span>Belajar dari dasar, pembekalan kerja, sampai dibantu bertemu perusahaan di Jepang.</span></label></div>
+        <div class="opt"><input type="radio" name="program" id="p2" value="Program lulus JFT" required><label class="card" for="p2"><b>Program lulus JFT</b><span>Fokus menyiapkan diri untuk ujian JFT-Basic.</span></label></div>
+      </div>
+      <div class="grid2">
+        <div class="field full"><label for="bahasa">Kemampuan Bahasa Jepang Saat Ini <i>*</i></label>
+          <select id="bahasa" name="bahasa" required>
+            <option value="">Pilih salah satu</option>
+            <option>Belum pernah belajar</option>
+            <option>Pemula (bisa huruf hiragana/katakana)</option>
+            <option>Sudah lulus JFT-Basic atau JLPT N5</option>
+            <option>JLPT N4 atau lebih tinggi</option>
+          </select></div>
+      </div>
+    </section>
+
+    <section class="fsec">
+      <span class="step-no">03</span>
+      <h2>Unggah Dokumen</h2>
+      <p class="note">Format foto JPG atau PNG. Ukuran foto akan dikecilkan otomatis agar PDF tidak terlalu besar. Dokumen ikut dimasukkan ke dalam PDF.</p>
+      <div class="ups">
+        <div class="up" data-key="ktp">
+          <input type="file" id="f-ktp" accept="image/png,image/jpeg">
+          <label class="up-box" for="f-ktp"><img class="thumb" alt=""><b>KTP</b><small class="hint">Klik untuk unggah</small></label>
+          <p class="err" aria-live="polite"></p>
+        </div>
+        <div class="up" data-key="ijazah">
+          <input type="file" id="f-ijazah" accept="image/png,image/jpeg">
+          <label class="up-box" for="f-ijazah"><img class="thumb" alt=""><b>Ijazah Terakhir</b><small class="hint">Klik untuk unggah</small></label>
+          <p class="err" aria-live="polite"></p>
+        </div>
+        <div class="up" data-key="foto">
+          <input type="file" id="f-foto" accept="image/png,image/jpeg">
+          <label class="up-box" for="f-foto"><img class="thumb" alt=""><b>Pas Foto Terbaru</b><small class="hint">Latar putih, tampak depan</small></label>
+          <p class="err" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <label class="agree"><input type="checkbox" id="setuju" required><span>Saya menyatakan bahwa seluruh data yang saya isi adalah benar dan menyetujui data ini digunakan untuk proses pendaftaran dan seleksi oleh LPK Andalan Talenta Nexa.</span></label>
+      <p class="after">Data diproses di perangkatmu dan tidak disimpan di website. PDF baru terkirim setelah kamu sendiri mengirimnya lewat WhatsApp.</p>
+
+      <p class="formErr" id="formErr" role="alert"></p>
+      <button type="submit" class="btn btn-navy" id="makeBtn">Buat PDF</button>
+    </section>
+
+    <section class="result" id="result" aria-live="polite">
+      <h3>PDF kamu sudah siap</h3>
+      <p id="resultName"></p>
+      <div class="acts">
+        <button type="button" class="btn btn-white" id="sendBtn">Kirim ke WhatsApp</button>
+        <button type="button" class="btn btn-ghost" id="dlBtn">Unduh PDF</button>
+      </div>
+      <p class="tip">Di HP: pilih WhatsApp di menu yang muncul, lalu pilih kontak admin (0821 6267 3232). Di komputer: PDF terunduh dan WhatsApp terbuka, lalu lampirkan PDF lewat ikon klip.</p>
+    </section>
+  </form>
+</main>
+
+<footer>© LPK Andalan Talenta Nexa</footer>
+
+<script>
+/* ===== PENGATURAN ===== */
+var WA_NUMBER = "6282162673232";
+var WA_DISPLAY = "0821 6267 3232";
+var EMAIL = "andalantalentanexa@gmail.com";
+var LEMBAGA = "LPK ANDALAN TALENTA NEXA";
+
+/* ===== NAVBAR ===== */
+function toggleMobileNav(){
+  var nav=document.getElementById("navLinks"),btn=document.getElementById("burgerBtn"),ov=document.getElementById("navOverlay");
+  if(nav.classList.contains("mobileOpen")){closeMobileNav();return;}
+  nav.classList.add("mobileOpen");btn.classList.add("open");btn.setAttribute("aria-expanded","true");
+  ov.classList.add("show");document.body.style.overflow="hidden";
+}
+function closeMobileNav(){
+  document.getElementById("navLinks").classList.remove("mobileOpen");
+  var btn=document.getElementById("burgerBtn");
+  btn.classList.remove("open");btn.setAttribute("aria-expanded","false");
+  document.getElementById("navOverlay").classList.remove("show");
+  document.body.style.overflow="";
+}
+window.addEventListener("resize",function(){if(window.innerWidth>860){closeMobileNav();}});
+
+/* ===== UNGGAH FOTO ===== */
+var docs = {ktp:null, ijazah:null, foto:null};
+var docLabel = {ktp:"KTP", ijazah:"Ijazah Terakhir", foto:"Pas Foto Terbaru"};
+var MAX_BYTES = 15 * 1024 * 1024;
+
+function compressImage(file){
+  return new Promise(function(resolve, reject){
+    var reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = function(){
+      var im = new Image();
+      im.onerror = reject;
+      im.onload = function(){
+        var max = 1400, w = im.naturalWidth, h = im.naturalHeight;
+        var s = Math.min(1, max / Math.max(w, h));
+        w = Math.round(w * s); h = Math.round(h * s);
+        var c = document.createElement("canvas");
+        c.width = w; c.height = h;
+        var ctx = c.getContext("2d");
+        ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(im, 0, 0, w, h);
+        resolve({data: c.toDataURL("image/jpeg", 0.75), w: w, h: h});
+      };
+      im.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+document.querySelectorAll(".up input").forEach(function(inp){
+  inp.addEventListener("change", async function(){
+    var box = inp.closest(".up"), key = box.dataset.key;
+    var err = box.querySelector(".err"), hint = box.querySelector(".hint"), thumb = box.querySelector(".thumb");
+    err.textContent = "";
+    var file = inp.files[0];
+    if(!file){ docs[key] = null; box.classList.remove("has"); hint.textContent = "Klik untuk unggah"; return; }
+    if(["image/jpeg","image/png"].indexOf(file.type) === -1){
+      docs[key] = null; box.classList.remove("has"); inp.value = "";
+      err.textContent = "Format harus JPG atau PNG."; return;
+    }
+    if(file.size > MAX_BYTES){
+      docs[key] = null; box.classList.remove("has"); inp.value = "";
+      err.textContent = "Ukuran file terlalu besar (maks. 15 MB)."; return;
+    }
+    try{
+      var img = await compressImage(file);
+      docs[key] = img;
+      thumb.src = img.data;
+      hint.textContent = file.name;
+      box.classList.add("has");
+    }catch(e){
+      docs[key] = null; box.classList.remove("has"); inp.value = "";
+      err.textContent = "Foto tidak bisa dibaca. Coba foto lain.";
+    }
+    hideResult();
+  });
+});
+
+/* ===== FORM ===== */
+var form = document.getElementById("regForm");
+var formErr = document.getElementById("formErr");
+var result = document.getElementById("result");
+var pdfBlob = null, pdfName = "", pdfText = "";
+
+document.getElementById("tglLahir").max = new Date().toISOString().split("T")[0];
+
+function hideResult(){ result.classList.remove("show"); }
+form.addEventListener("input", hideResult);
+
+var BULAN = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+function formatTanggal(iso){
+  if(!iso) return "-";
+  var p = iso.split("-");
+  return parseInt(p[2],10) + " " + BULAN[parseInt(p[1],10)-1] + " " + p[0];
+}
+function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"") || "pendaftar"; }
+
+form.addEventListener("submit", async function(e){
+  e.preventDefault();
+  formErr.classList.remove("show");
+
+  if(!form.checkValidity()){
+    form.reportValidity();
+    return;
+  }
+  var missing = Object.keys(docs).filter(function(k){ return !docs[k]; });
+  if(missing.length){
+    missing.forEach(function(k){
+      document.querySelector('.up[data-key="'+k+'"] .err').textContent = "Dokumen ini belum diunggah.";
+    });
+    formErr.textContent = "Unggah semua dokumen dulu: " + missing.map(function(k){return docLabel[k];}).join(", ") + ".";
+    formErr.classList.add("show");
+    document.querySelector('.up[data-key="'+missing[0]+'"]').scrollIntoView({behavior:"smooth", block:"center"});
+    return;
+  }
+  if(typeof window.jspdf === "undefined"){
+    formErr.textContent = "Pembuat PDF belum termuat. Cek koneksi internet lalu muat ulang halaman.";
+    formErr.classList.add("show");
+    return;
+  }
+
+  var fd = new FormData(form);
+  var data = {
+    nama: fd.get("nama").trim(),
+    tgl: formatTanggal(fd.get("tglLahir")),
+    tempat: fd.get("tmpLahir").trim(),
+    jk: fd.get("jk"),
+    pend: fd.get("pend"),
+    alamat: fd.get("alamat").trim(),
+    wa: fd.get("wa").trim(),
+    email: fd.get("email").trim(),
+    program: fd.get("program"),
+    bahasa: fd.get("bahasa")
+  };
+
+  var btn = document.getElementById("makeBtn");
+  btn.disabled = true; btn.textContent = "Membuat PDF...";
+  try{
+    pdfBlob = await buildPdf(data);
+    pdfName = "Formulir-NEXA-" + slug(data.nama) + ".pdf";
+    pdfText = "Halo Admin LPK Andalan Talenta Nexa, saya " + data.nama +
+      " ingin mendaftar program \"" + data.program + "\". Berikut formulir pendaftaran saya dalam bentuk PDF.";
+    document.getElementById("resultName").textContent = pdfName + " (" + Math.max(1, Math.round(pdfBlob.size/1024)) + " KB)";
+    result.classList.add("show");
+    result.scrollIntoView({behavior:"smooth", block:"center"});
+  }catch(err){
+    console.error(err);
+    formErr.textContent = "PDF gagal dibuat. Coba lagi, atau gunakan foto dengan ukuran lebih kecil.";
+    formErr.classList.add("show");
+  }finally{
+    btn.disabled = false; btn.textContent = "Buat PDF";
+  }
+});
+
+/* ===== PEMBUAT PDF ===== */
+function loadLogo(){
+  return new Promise(function(resolve){
+    var im = new Image();
+    im.onload = function(){
+      try{
+        var c = document.createElement("canvas");
+        c.width = im.naturalWidth; c.height = im.naturalHeight;
+        c.getContext("2d").drawImage(im, 0, 0);
+        resolve({data: c.toDataURL("image/png"), w: im.naturalWidth, h: im.naturalHeight});
+      }catch(e){ resolve(null); }
+    };
+    im.onerror = function(){ resolve(null); };
+    im.src = "logo.png";
+  });
+}
+
+function fitBox(w, h, maxW, maxH){
+  var r = Math.min(maxW / w, maxH / h);
+  return {w: w * r, h: h * r};
+}
+
+async function buildPdf(d){
+  var jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF({unit:"mm", format:"a4"});
+  var NAVY = [0,42,77], TEAL = [31,103,127], SOFT = [91,102,115], LINE = [227,231,236];
+  var M = 18, PW = 210, RIGHT = PW - M;
+  var logo = await loadLogo();
+
+  function header(){
+    var tx = M;
+    if(logo){
+      var lh = 16, lw = lh * logo.w / logo.h;
+      if(lw > 30){ lw = 30; lh = lw * logo.h / logo.w; }
+      doc.addImage(logo.data, "PNG", M, 9, lw, lh);
+      tx = M + lw + 4;
+    }
+    doc.setFont("helvetica","bold"); doc.setFontSize(14); doc.setTextColor.apply(doc, NAVY);
+    doc.text(LEMBAGA, tx, 16);
+    doc.setFont("helvetica","normal"); doc.setFontSize(9); doc.setTextColor.apply(doc, SOFT);
+    doc.text("Lembaga Pelatihan Kerja Bahasa Jepang", tx, 21);
+    doc.text("Boyolali, Jawa Tengah  |  " + WA_DISPLAY + "  |  " + EMAIL, tx, 25.5);
+    doc.setDrawColor.apply(doc, TEAL); doc.setLineWidth(0.6);
+    doc.line(M, 30, RIGHT, 30);
+  }
+  function footer(){
+    doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor.apply(doc, SOFT);
+    doc.text("Dokumen ini dibuat otomatis dari formulir online " + LEMBAGA + ".", PW/2, 288, {align:"center"});
+  }
+  function sectionTitle(t, y){
+    doc.setFillColor.apply(doc, TEAL); doc.rect(M, y - 4, 1.6, 5.2, "F");
+    doc.setFont("helvetica","bold"); doc.setFontSize(10.5); doc.setTextColor.apply(doc, NAVY);
+    doc.text(t, M + 4, y);
+  }
+  function row(label, value, y, w){
+    var lines = doc.splitTextToSize(value || "-", w);
+    var h = lines.length * 4.7 + 3.6;
+    doc.setFont("helvetica","normal"); doc.setFontSize(9.5);
+    doc.setTextColor.apply(doc, SOFT); doc.text(label, M, y + 4);
+    doc.setTextColor.apply(doc, NAVY); doc.text(lines, M + 46, y + 4);
+    doc.setDrawColor.apply(doc, LINE); doc.setLineWidth(0.25);
+    doc.line(M, y + h, M + 46 + w, y + h);
+    return y + h;
+  }
+
+  /* HALAMAN 1 */
+  header();
+  doc.setFont("helvetica","bold"); doc.setFontSize(13); doc.setTextColor.apply(doc, NAVY);
+  doc.text("FORMULIR PENDAFTARAN", M, 41);
+  var now = new Date();
+  doc.setFont("helvetica","normal"); doc.setFontSize(9); doc.setTextColor.apply(doc, SOFT);
+  doc.text("Tanggal pengisian: " + now.getDate() + " " + BULAN[now.getMonth()] + " " + now.getFullYear(), RIGHT, 41, {align:"right"});
+
+  /* pas foto */
+  var px = RIGHT - 34, py = 48;
+  doc.setDrawColor.apply(doc, LINE); doc.setLineWidth(0.4);
+  doc.rect(px, py, 34, 44);
+  var f = fitBox(docs.foto.w, docs.foto.h, 34, 44);
+  doc.addImage(docs.foto.data, "JPEG", px + (34 - f.w)/2, py + (44 - f.h)/2, f.w, f.h);
+
+  var y = 54;
+  sectionTitle("A. Data Diri", y); y += 3;
+  y = row("Nama Lengkap", d.nama, y, 84);
+  y = row("Tempat, Tanggal Lahir", d.tempat + ", " + d.tgl, y, 84);
+  y = row("Jenis Kelamin", d.jk, y, 84);
+  y = row("Pendidikan Terakhir", d.pend, y, 84);
+  y = row("Alamat Domisili", d.alamat, y, 84);
+  y = row("Nomor WhatsApp", d.wa, y, 84);
+  y = row("Email", d.email, y, 84);
+
+  y = Math.max(y, 96) + 9;
+  sectionTitle("B. Program yang Diminati", y); y += 3;
+  y = row("Program", d.program, y, 126);
+  y = row("Kemampuan Bahasa Jepang", d.bahasa, y, 126);
+
+  y += 9;
+  sectionTitle("C. Pernyataan", y); y += 4;
+  doc.setFont("helvetica","normal"); doc.setFontSize(9.5); doc.setTextColor.apply(doc, NAVY);
+  var stmt = doc.splitTextToSize("Saya menyatakan bahwa seluruh data yang saya isi pada formulir ini adalah benar dan menyetujui data ini digunakan untuk proses pendaftaran dan seleksi oleh " + LEMBAGA + ".", RIGHT - M);
+  doc.text(stmt, M, y + 3);
+  y += stmt.length * 4.7 + 10;
+
+  doc.text("Pendaftar,", RIGHT - 60, y);
+  doc.setDrawColor.apply(doc, NAVY); doc.setLineWidth(0.3);
+  doc.line(RIGHT - 60, y + 26, RIGHT, y + 26);
+  doc.setFont("helvetica","bold");
+  doc.text(d.nama, RIGHT - 60, y + 31);
+  footer();
+
+  /* HALAMAN 2 : LAMPIRAN */
+  doc.addPage();
+  header();
+  doc.setFont("helvetica","bold"); doc.setFontSize(13); doc.setTextColor.apply(doc, NAVY);
+  doc.text("LAMPIRAN DOKUMEN", M, 41);
+  doc.setFont("helvetica","normal"); doc.setFontSize(9); doc.setTextColor.apply(doc, SOFT);
+  doc.text("Nama: " + d.nama, RIGHT, 41, {align:"right"});
+
+  function attach(label, img, top, maxH){
+    sectionTitle(label, top);
+    var boxW = RIGHT - M;
+    doc.setDrawColor.apply(doc, LINE); doc.setLineWidth(0.4);
+    doc.rect(M, top + 3, boxW, maxH);
+    var s = fitBox(img.w, img.h, boxW - 6, maxH - 6);
+    doc.addImage(img.data, "JPEG", M + (boxW - s.w)/2, top + 3 + (maxH - s.h)/2, s.w, s.h);
+  }
+  attach("KTP", docs.ktp, 54, 100);
+  attach("Ijazah Terakhir", docs.ijazah, 168, 106);
+  footer();
+
+  return doc.output("blob");
+}
+
+/* ===== KIRIM / UNDUH ===== */
+function downloadPdf(){
+  var url = URL.createObjectURL(pdfBlob);
+  var a = document.createElement("a");
+  a.href = url; a.download = pdfName;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+}
+document.getElementById("dlBtn").addEventListener("click", function(){
+  if(pdfBlob) downloadPdf();
+});
+document.getElementById("sendBtn").addEventListener("click", async function(){
+  if(!pdfBlob) return;
+  var waLink = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(pdfText);
+  var file = new File([pdfBlob], pdfName, {type:"application/pdf"});
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    try{
+      await navigator.share({files:[file], text: pdfText});
+      return;
+    }catch(e){
+      if(e && e.name === "AbortError") return;
+    }
+  }
+  downloadPdf();
+  window.open(waLink, "_blank", "noopener");
+});
+</script>
+
+</body>
+</html>
