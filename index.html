@@ -7,41 +7,58 @@
 <title>LPK Andalan Talenta Nexa — Belajar Bahasa Jepang, Lulus JFT, Matching Job</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#002a4d;--teal:#1f677f;--soft:#5b6673;--line:#e3e7ec;--tint:#f6f7f9;--white:#fff;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;scroll-padding-top:80px;}
-body{font-family:"Plus Jakarta Sans","Segoe UI",sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden;line-height:1.65;}
+body{font-family:"Plus Jakarta Sans","Noto Sans JP","Hiragino Sans","Yu Gothic","Segoe UI",sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden;line-height:1.65;}
 a{color:inherit;}
 :focus-visible{outline:3px solid var(--teal);outline-offset:2px;}
 
 /* NAVBAR */
 #navbar{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);}
-.navbar-inner{max-width:1160px;margin:0 auto;min-height:72px;padding:8px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
-.brand{display:flex;align-items:center;gap:11px;text-decoration:none;}
-.brand img{height:44px;width:auto;display:block;}
+.navbar-inner{max-width:1160px;margin:0 auto;min-height:72px;padding:8px 22px;display:flex;align-items:center;gap:16px;}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex:none;}
+.brand img{height:46px;width:auto;max-width:none;display:block;flex:none;}
+.brand-logo{position:relative;display:block;flex:none;}
+.brand-logo .shine{display:none;position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.75) 50%,rgba(255,255,255,0) 58%);background-size:250% 100%;background-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:100% 100%;mask-size:100% 100%;animation:markSweep 4.5s ease-in-out infinite;}
+.brand-logo.ok .shine{display:block;}
+@keyframes markSweep{0%{background-position:140% 0;}45%,100%{background-position:-40% 0;}}
+@media(prefers-reduced-motion:reduce){.brand-logo .shine{animation:none!important;display:none!important;}}
 .brand-text{display:flex;flex-direction:column;line-height:1.15;}
 .brand-text b{font-weight:800;font-size:1.02rem;}
 .brand-text span{font-size:.72rem;color:var(--soft);}
-.nav-links{display:flex;align-items:center;gap:4px;}
-.nav-links a{text-decoration:none;font-weight:700;font-size:.92rem;padding:10px 15px;border-radius:999px;}
+.nav-links{display:flex;align-items:center;gap:4px;flex:1;margin-left:20px;}
+.nav-links a{text-decoration:none;font-weight:700;font-size:.92rem;padding:10px 15px;border-radius:999px;white-space:nowrap;}
 .nav-links a:hover{background:var(--tint);}
+.nav-links .push{margin-left:auto;}
 .nav-links a.nav-cta{background:var(--navy);color:#fff;margin-left:8px;}
 .nav-links a.nav-cta:hover{background:var(--teal);}
-.burger-btn{display:none;flex:none;width:46px;height:46px;border:2px solid var(--navy);border-radius:50%;background:#fff;cursor:pointer;align-items:center;justify-content:center;gap:4px;flex-direction:column;position:relative;z-index:1001;}
+.lang{display:flex;flex:none;border:1.5px solid var(--navy);border-radius:999px;padding:2px;margin-left:10px;}
+.lang button{border:0;background:transparent;font:inherit;font-weight:700;font-size:.8rem;line-height:1;padding:7px 12px;border-radius:999px;cursor:pointer;color:var(--navy);}
+.lang button[aria-pressed="true"]{background:var(--navy);color:#fff;}
+.burger-btn{display:none;flex:none;width:46px;height:46px;border:2px solid var(--navy);border-radius:50%;background:#fff;cursor:pointer;align-items:center;justify-content:center;gap:4px;flex-direction:column;position:relative;z-index:1001;margin-left:auto;}
 .burger-btn span{display:block;width:20px;height:2px;background:var(--navy);border-radius:2px;transition:.25s ease;}
 .burger-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
 .burger-btn.open span:nth-child(2){opacity:0;}
 .burger-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
 .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,42,77,.5);z-index:998;}
 .nav-overlay.show{display:block;}
-@media(max-width:860px){
+@media(min-width:981px) and (max-width:1120px){
+  .nav-links{margin-left:8px;}
+  .nav-links a{padding:10px 9px;font-size:.84rem;}
+  .lang{margin-left:6px;}
+}
+@media(max-width:980px){
   .burger-btn{display:flex;}
-  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(82vw,330px);background:#fff;flex-direction:column;align-items:stretch;gap:8px;padding:88px 20px 24px;transform:translateX(100%);transition:transform .28s ease;z-index:1000;overflow-y:auto;box-shadow:-10px 0 30px rgba(0,42,77,.25);}
+  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(82vw,330px);background:#fff;flex-direction:column;align-items:stretch;gap:8px;padding:88px 20px 24px;margin-left:0;flex:none;transform:translateX(100%);transition:transform .28s ease;z-index:1000;overflow-y:auto;box-shadow:-10px 0 30px rgba(0,42,77,.25);}
   .nav-links.mobileOpen{transform:translateX(0);}
   .nav-links a{padding:15px 18px;font-size:1rem;border-radius:14px;background:var(--tint);}
+  .nav-links .push{margin-left:0;}
   .nav-links a.nav-cta{margin:10px 0 0;text-align:center;background:var(--navy);}
+  .lang{align-self:flex-start;margin:6px 0 0;}
+  .lang button{font-size:.9rem;padding:9px 16px;}
 }
 
 /* HERO */
@@ -51,7 +68,7 @@ a{color:inherit;}
 .hero h1 em{font-style:normal;color:var(--teal);}
 .hero p{color:var(--soft);font-size:1.1rem;max-width:500px;margin-bottom:34px;}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;}
-.hero-mark{position:absolute;right:22px;top:50%;transform:translateY(-50%);width:min(32vw,360px);height:auto;opacity:.08;pointer-events:none;user-select:none;z-index:-1;}
+.hero-mark{position:absolute;right:22px;top:50%;transform:translateY(-50%);width:min(24vw,260px);height:auto;opacity:.08;pointer-events:none;user-select:none;z-index:-1;}
 .btn{display:inline-block;text-decoration:none;padding:15px 28px;border-radius:999px;font-weight:700;font-size:.96rem;transition:.18s;border:1.5px solid transparent;cursor:pointer;}
 .btn-navy{background:var(--navy);color:#fff;}
 .btn-navy:hover{background:var(--teal);}
@@ -59,7 +76,7 @@ a{color:inherit;}
 .btn-line:hover{background:var(--navy);color:#fff;}
 .btn-white{background:#fff;color:var(--navy);}
 .btn-white:hover{background:#dfe9f0;}
-@media(max-width:860px){.hero-inner{padding:68px 20px 76px;}.hero-mark{right:20px;top:auto;bottom:36px;transform:none;width:44vw;}}
+@media(max-width:860px){.hero-inner{padding:68px 20px 76px;}.hero-mark{right:20px;top:auto;bottom:36px;transform:none;width:36vw;}}
 
 /* SECTIONS */
 .wrap{max-width:1160px;margin:0 auto;padding:96px 22px 0;}
@@ -121,9 +138,6 @@ a{color:inherit;}
   .proc{grid-template-columns:1fr;}
   .proc > li:nth-last-child(2){border-bottom:0;}
 }
-@media(min-width:861px) and (max-width:1060px){
-  .nav-links a{padding:10px 11px;font-size:.88rem;}
-}
 
 /* CTA */
 .cta{max-width:1160px;margin:96px auto 0;padding:0 22px;}
@@ -155,25 +169,30 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 
 <nav id="navbar">
   <div class="navbar-inner">
-    <a href="images/LOGO NEXA-NO BACKGROUND.png" class="brand">
-      <!-- LOGO: simpan file logo di folder yang sama dengan index.html, beri nama logo.png -->
-      <img src="images/LOGO NEXA-NO BACKGROUND.png" alt="Logo Andalan Talenta Nexa">
-      <span class="brand-text"><b>Andalan Talenta Nexa</b><span>LPK Bahasa Jepang</span></span>
+    <a href="#beranda" class="brand">
+      <span class="brand-logo">
+        <img data-logo alt="Logo Andalan Talenta Nexa">
+        <span class="shine"></span>
+      </span>
+      <span class="brand-text"><b>Andalan Talenta Nexa</b><span data-t="brandSub">LPK Bahasa Jepang</span></span>
     </a>
 
-    <button class="burger-btn" id="burgerBtn" type="button" aria-label="Buka menu" aria-expanded="false" onclick="toggleMobileNav()">
+    <button class="burger-btn" id="burgerBtn" type="button" aria-label="Menu" aria-expanded="false" onclick="toggleMobileNav()">
       <span></span><span></span><span></span>
     </button>
 
     <div class="nav-links" id="navLinks">
-      <a href="#beranda" onclick="closeMobileNav()">Beranda</a>
-      <a href="#tentang" onclick="closeMobileNav()">Tentang</a>
-      <a href="#program" onclick="closeMobileNav()">Program</a>
-      <a href="#alur" onclick="closeMobileNav()">Alur Belajar</a>
-      <a href="#prosedur" onclick="closeMobileNav()">Prosedur</a>
-      <a href="#kontak" onclick="closeMobileNav()">Kontak</a>
-      <!-- Ganti href di bawah dengan link formulir pendaftaran (mis. Google Form) -->
-      <a href="formulir.html" class="nav-cta">Isi Formulir</a>
+      <a href="#beranda" onclick="closeMobileNav()" data-t="nHome">Beranda</a>
+      <a href="#tentang" onclick="closeMobileNav()" data-t="nAbout">Tentang</a>
+      <a href="#program" class="push" onclick="closeMobileNav()" data-t="nProg">Program</a>
+      <a href="#alur" onclick="closeMobileNav()" data-t="nFlow">Alur Belajar</a>
+      <a href="#prosedur" onclick="closeMobileNav()" data-t="nProc">Prosedur</a>
+      <a href="#kontak" onclick="closeMobileNav()" data-t="nContact">Kontak</a>
+      <div class="lang" role="group" aria-label="Bahasa / 言語">
+        <button type="button" data-lang="id" aria-pressed="true">ID</button>
+        <button type="button" data-lang="ja" aria-pressed="false" lang="ja">日本語</button>
+      </div>
+      <a href="formulir.html" class="nav-cta" data-t="nForm">Isi Formulir</a>
     </div>
   </div>
   <div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
@@ -181,143 +200,143 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 
 <section class="hero" id="beranda">
   <div class="hero-inner">
-    <img class="hero-mark" src="images/LOGO NEXA-NO BACKGROUND.png" alt="" aria-hidden="true">
-    <h1>Belajar bahasa Jepang, lulus JFT, lalu <em>dibantu matching job</em></h1>
-    <p>LPK Andalan Talenta Nexa mendampingi kamu dari belajar dasar sampai bertemu perusahaan di Jepang.</p>
+    <img class="hero-mark" data-logo alt="" aria-hidden="true">
+    <h1 data-t="h1">Belajar bahasa Jepang, lulus JFT, lalu <em>dibantu matching job</em></h1>
+    <p data-t="heroP">LPK Andalan Talenta Nexa mendampingi kamu dari belajar dasar sampai bertemu perusahaan di Jepang.</p>
     <div class="hero-cta">
-      <a href="formulir.html" class="btn btn-navy">Isi Formulir Pendaftaran</a>
-      <a href="#program" class="btn btn-line">Lihat Program</a>
+      <a href="formulir.html" class="btn btn-navy" data-t="heroB1">Isi Formulir Pendaftaran</a>
+      <a href="#program" class="btn btn-line" data-t="heroB2">Lihat Program</a>
     </div>
   </div>
 </section>
 
 <section class="wrap" id="tentang">
-  <h2>Tentang Kami</h2>
-  <p class="about-intro">Andalan Talenta NEXA adalah lembaga pelatihan dan pengembangan sumber daya manusia yang berfokus pada pembekalan keterampilan bahasa, budaya kerja, serta kesiapan mental bagi calon tenaga kerja yang ingin berkarier di luar negeri, khususnya Jepang.</p>
-  <p class="about-intro">Kami hadir untuk menjembatani potensi anak bangsa dengan peluang internasional melalui pelatihan bahasa Jepang intensif, pembinaan karakter, dan persiapan magang kerja ke luar negeri.</p>
+  <h2 data-t="aTitle">Tentang Kami</h2>
+  <p class="about-intro" data-t="aP1">Andalan Talenta NEXA adalah lembaga pelatihan dan pengembangan sumber daya manusia yang berfokus pada pembekalan keterampilan bahasa, budaya kerja, serta kesiapan mental bagi calon tenaga kerja yang ingin berkarier di luar negeri, khususnya Jepang.</p>
+  <p class="about-intro" data-t="aP2">Kami hadir untuk menjembatani potensi anak bangsa dengan peluang internasional melalui pelatihan bahasa Jepang intensif, pembinaan karakter, dan persiapan magang kerja ke luar negeri.</p>
 
   <div class="vm">
     <div class="vm-box">
-      <h3>Visi</h3>
-      <p>Menjadi lembaga pelatihan unggulan dalam mencetak talenta profesional yang fasih berbahasa Jepang, berdaya saing tinggi, dan siap menghadapi dunia kerja global.</p>
+      <h3 data-t="vTitle">Visi</h3>
+      <p data-t="vP">Menjadi lembaga pelatihan unggulan dalam mencetak talenta profesional yang fasih berbahasa Jepang, berdaya saing tinggi, dan siap menghadapi dunia kerja global.</p>
     </div>
     <div class="vm-box alt">
-      <h3>Misi</h3>
+      <h3 data-t="mTitle">Misi</h3>
       <ol>
-        <li>Menyelenggarakan pelatihan Bahasa Jepang yang intensif, terstruktur, dan sesuai dengan standar industri serta kebutuhan magang di Jepang.</li>
-        <li>Mempersiapkan peserta secara menyeluruh, baik dari sisi keterampilan bahasa, pemahaman budaya kerja Jepang, maupun mentalitas kerja.</li>
-        <li>Menjadi penghubung terpercaya antara calon peserta magang dan perusahaan penerima di Jepang melalui kerja sama yang berkelanjutan dan transparan.</li>
+        <li data-t="m1">Menyelenggarakan pelatihan Bahasa Jepang yang intensif, terstruktur, dan sesuai dengan standar industri serta kebutuhan magang di Jepang.</li>
+        <li data-t="m2">Mempersiapkan peserta secara menyeluruh, baik dari sisi keterampilan bahasa, pemahaman budaya kerja Jepang, maupun mentalitas kerja.</li>
+        <li data-t="m3">Menjadi penghubung terpercaya antara calon peserta magang dan perusahaan penerima di Jepang melalui kerja sama yang berkelanjutan dan transparan.</li>
       </ol>
     </div>
   </div>
 </section>
 
 <section class="wrap" id="program">
-  <h2>Pilih program yang cocok</h2>
-  <p class="sub">Mau lengkap sampai kerja, atau fokus lulus JFT dulu? Dua-duanya tersedia.</p>
+  <h2 data-t="pTitle">Pilih program yang cocok</h2>
+  <p class="sub" data-t="pSub">Mau lengkap sampai kerja, atau fokus lulus JFT dulu? Dua-duanya tersedia.</p>
 
   <div class="programs">
     <div class="prog">
-      <h3>Belajar sampai matching job</h3>
-      <p>Program lengkap untuk kamu yang ingin bekerja di Jepang, mulai dari nol.</p>
+      <h3 data-t="p1h">Belajar sampai matching job</h3>
+      <p data-t="p1p">Program lengkap untuk kamu yang ingin bekerja di Jepang, mulai dari nol.</p>
       <ul>
-        <li>Belajar bahasa Jepang dari dasar</li>
-        <li>Pembekalan budaya dan etika kerja di Jepang</li>
-        <li>Persiapan berkas dan latihan wawancara</li>
-        <li>Pendampingan matching job dengan perusahaan</li>
+        <li data-t="p1a">Belajar bahasa Jepang dari dasar</li>
+        <li data-t="p1b">Pembekalan budaya dan etika kerja di Jepang</li>
+        <li data-t="p1c">Persiapan berkas dan latihan wawancara</li>
+        <li data-t="p1d">Pendampingan matching job dengan perusahaan</li>
       </ul>
     </div>
     <div class="prog alt">
-      <h3>Program lulus JFT</h3>
-      <p>Fokus menyiapkan diri untuk ujian JFT-Basic.</p>
+      <h3 data-t="p2h">Program lulus JFT</h3>
+      <p data-t="p2p">Fokus menyiapkan diri untuk ujian JFT-Basic.</p>
       <ul>
-        <li>Materi kosakata, tata bahasa, dan kanji</li>
-        <li>Latihan soal bertahap secara online</li>
-        <li>Simulasi ujian</li>
-        <li>Pembahasan soal bersama pengajar</li>
+        <li data-t="p2a">Materi kosakata, tata bahasa, dan kanji</li>
+        <li data-t="p2b">Latihan soal bertahap secara online</li>
+        <li data-t="p2c">Simulasi ujian</li>
+        <li data-t="p2d">Pembahasan soal bersama pengajar</li>
       </ul>
     </div>
   </div>
 </section>
 
 <section class="wrap" id="alur">
-  <h2>Alur belajar</h2>
-  <p class="sub">Lima langkah dari mendaftar sampai bertemu perusahaan.</p>
+  <h2 data-t="fTitle">Alur belajar</h2>
+  <p class="sub" data-t="fSub">Lima langkah dari mendaftar sampai bertemu perusahaan.</p>
 
   <ol class="steps">
-    <li class="step"><h3>Isi formulir</h3><p>Lengkapi data diri lewat tombol Isi Formulir.</p></li>
-    <li class="step"><h3>Belajar bahasa Jepang</h3><p>Mulai dari dasar dengan materi dan latihan harian.</p></li>
-    <li class="step"><h3>Latihan dan lulus JFT</h3><p>Perdalam materi lewat latihan soal dan simulasi.</p></li>
-    <li class="step"><h3>Persiapan kerja</h3><p>Siapkan berkas, etika kerja, dan wawancara.</p></li>
-    <li class="step"><h3>Matching job</h3><p>Dibantu dipertemukan dengan perusahaan.</p></li>
+    <li class="step"><h3 data-t="s1h">Isi formulir</h3><p data-t="s1p">Lengkapi data diri lewat tombol Isi Formulir.</p></li>
+    <li class="step"><h3 data-t="s2h">Belajar bahasa Jepang</h3><p data-t="s2p">Mulai dari dasar dengan materi dan latihan harian.</p></li>
+    <li class="step"><h3 data-t="s3h">Latihan dan lulus JFT</h3><p data-t="s3p">Perdalam materi lewat latihan soal dan simulasi.</p></li>
+    <li class="step"><h3 data-t="s4h">Persiapan kerja</h3><p data-t="s4p">Siapkan berkas, etika kerja, dan wawancara.</p></li>
+    <li class="step"><h3 data-t="s5h">Matching job</h3><p data-t="s5p">Dibantu dipertemukan dengan perusahaan.</p></li>
   </ol>
 </section>
 
 <section class="wrap" id="prosedur">
-  <h2>Prosedur pemagangan ke Jepang</h2>
-  <p class="sub">Sepuluh tahap dari perekrutan sampai berangkat ke Jepang.</p>
+  <h2 data-t="prTitle">Prosedur pemagangan ke Jepang</h2>
+  <p class="sub" data-t="prSub">Sepuluh tahap dari perekrutan sampai berangkat ke Jepang.</p>
 
   <ol class="proc">
     <li>
-      <h3>Perekrutan</h3>
+      <h3 data-t="q1h">Perekrutan</h3>
       <span class="tag">LPK NEXA</span>
       <ul class="det">
-        <li>Bimbingan belajar</li>
-        <li>Berlatih disiplin dan mental</li>
-        <li>Bimbingan matematika</li>
-        <li>Pengecekan berkas</li>
+        <li data-t="q1a">Bimbingan belajar</li>
+        <li data-t="q1b">Berlatih disiplin dan mental</li>
+        <li data-t="q1c">Bimbingan matematika</li>
+        <li data-t="q1d">Pengecekan berkas</li>
       </ul>
     </li>
     <li>
-      <h3>Pra MCU</h3>
-      <p>Pra medical sebelum pelatihan bahasa (Klinik REDY Solo).</p>
+      <h3 data-t="q2h">Pra MCU</h3>
+      <p data-t="q2p">Pra medical sebelum pelatihan bahasa (Klinik REDY Solo).</p>
     </li>
     <li>
-      <h3>Pelatihan bahasa 3 bulan</h3>
+      <h3 data-t="q3h">Pelatihan bahasa 3 bulan</h3>
       <ul class="det">
-        <li>Hiragana dan katakana</li>
-        <li>Bahasa Jepang Bab 1–25</li>
-        <li>Kosakata dasar</li>
-        <li>Disiplin dan mental</li>
-        <li>Pra interview</li>
+        <li data-t="q3a">Hiragana dan katakana</li>
+        <li data-t="q3b">Bahasa Jepang Bab 1–25</li>
+        <li data-t="q3c">Kosakata dasar</li>
+        <li data-t="q3d">Disiplin dan mental</li>
+        <li data-t="q3e">Pra interview</li>
       </ul>
     </li>
     <li>
-      <h3>Test SO (Mendan)</h3>
+      <h3 data-t="q4h">Test SO (Mendan)</h3>
       <ul class="det">
-        <li>Tes bahasa Jepang dan MTK</li>
-        <li>Percakapan dasar</li>
-        <li>Pengisian angket dan CV</li>
+        <li data-t="q4a">Tes bahasa Jepang dan MTK</li>
+        <li data-t="q4b">Percakapan dasar</li>
+        <li data-t="q4c">Pengisian angket dan CV</li>
       </ul>
     </li>
     <li>
-      <h3>Wawancara user Jepang</h3>
-      <p>Online atau offline di Jakarta. Akomodasi ditanggung LPK.</p>
+      <h3 data-t="q5h">Wawancara user Jepang</h3>
+      <p data-t="q5p">Online atau offline di Jakarta. Akomodasi ditanggung LPK.</p>
     </li>
     <li>
-      <h3>MCU</h3>
-      <p>Pemeriksaan kesehatan full.</p>
+      <h3 data-t="q6h">MCU</h3>
+      <p data-t="q6p">Pemeriksaan kesehatan full.</p>
     </li>
     <li>
-      <h3>Pemberkasan</h3>
-      <p>Pengecekan ulang dokumen.</p>
+      <h3 data-t="q7h">Pemberkasan</h3>
+      <p data-t="q7p">Pengecekan ulang dokumen.</p>
     </li>
     <li>
-      <h3>Pembuatan paspor</h3>
-      <p>Dipandu pendaftaran paspor online.</p>
+      <h3 data-t="q8h">Pembuatan paspor</h3>
+      <p data-t="q8p">Dipandu pendaftaran paspor online.</p>
     </li>
     <li>
-      <h3>Diklat SO</h3>
+      <h3 data-t="q9h">Diklat SO</h3>
       <ul class="det">
-        <li>Pemantapan bahasa Jepang</li>
-        <li>Budaya Jepang</li>
-        <li>Disiplin dan mental</li>
-        <li>Sikap dan fisik</li>
+        <li data-t="q9a">Pemantapan bahasa Jepang</li>
+        <li data-t="q9b">Budaya Jepang</li>
+        <li data-t="q9c">Disiplin dan mental</li>
+        <li data-t="q9d">Sikap dan fisik</li>
       </ul>
     </li>
     <li>
-      <h3>Berangkat ke Jepang</h3>
-      <p>Peserta berangkat menuju perusahaan penerima.</p>
+      <h3 data-t="q10h">Berangkat ke Jepang</h3>
+      <p data-t="q10p">Peserta berangkat menuju perusahaan penerima.</p>
     </li>
   </ol>
 </section>
@@ -325,30 +344,30 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 <section class="cta">
   <div class="ctaBox">
     <div>
-      <h2>Siap mulai belajar?</h2>
-      <p>Isi formulir sekarang, tim kami akan membantu memilih program yang cocok.</p>
+      <h2 data-t="ctaH">Siap mulai belajar?</h2>
+      <p data-t="ctaP">Isi formulir sekarang, tim kami akan membantu memilih program yang cocok.</p>
     </div>
-    <a href="formulir.html" class="btn btn-white">Isi Formulir Sekarang</a>
+    <a href="formulir.html" class="btn btn-white" data-t="ctaB">Isi Formulir Sekarang</a>
   </div>
 </section>
 
 <section class="wrap" id="kontak">
   <div class="contact">
     <div>
-      <h2>Hubungi kami</h2>
-      <p class="sub">Punya pertanyaan soal program atau pendaftaran? Datang langsung atau hubungi lewat kontak di samping.</p>
+      <h2 data-t="kTitle">Hubungi kami</h2>
+      <p class="sub" data-t="kSub">Punya pertanyaan soal program atau pendaftaran? Datang langsung atau hubungi lewat kontak di samping.</p>
       <div class="cBtns">
-        <a href="https://wa.me/6282162673232" class="btn btn-navy">Chat WhatsApp</a>
-        <a href="mailto:andalantalentanexa@gmail.com" class="btn btn-line">Kirim Email</a>
+        <a href="https://wa.me/6282162673232" class="btn btn-navy" data-t="kB1">Chat WhatsApp</a>
+        <a href="mailto:andalantalentanexa@gmail.com" class="btn btn-line" data-t="kB2">Kirim Email</a>
       </div>
     </div>
     <dl class="cRows">
-      <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Alamat</span></dt><dd>Jl. Cendrawasih No. 11, RT 003 RW 004, Dukuh Brogo, Sanggrahan, Donohudan, Kec. Ngemplak, Kab. Boyolali, Jawa Tengah</dd></div>
-      <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>WhatsApp / Telepon</span></dt><dd><a href="https://wa.me/6282162673232">0821 6267 3232</a></dd></div>
-      <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>Email</span></dt><dd><a href="mailto:andalantalentanexa@gmail.com">andalantalentanexa@gmail.com</a></dd></div>
+      <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-t="kAddr">Alamat</span></dt><dd>Jl. Cendrawasih No. 11, RT 003 RW 004, Dukuh Brogo, Sanggrahan, Donohudan, Kec. Ngemplak, Kab. Boyolali, Jawa Tengah</dd></div>
+      <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-t="kWa">WhatsApp / Telepon</span></dt><dd><a href="https://wa.me/6282162673232">0821 6267 3232</a></dd></div>
+      <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span data-t="kMail">Email</span></dt><dd><a href="mailto:andalantalentanexa@gmail.com">andalantalentanexa@gmail.com</a></dd></div>
       <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span>Instagram</span></dt><dd><a href="https://www.instagram.com/andalantalentanexa" target="_blank" rel="noopener">Andalan Talenta Nexa</a></dd></div>
       <div class="cRow"><dt><svg class="ico fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg><span>TikTok</span></dt><dd><a href="https://www.tiktok.com/@andalantalentanexa" target="_blank" rel="noopener">Andalan Talenta Nexa</a></dd></div>
-      <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Jam layanan</span></dt><dd>Senin – Jumat, 08.00 – 16.00 WIB</dd></div>
+      <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-t="kHrs">Jam layanan</span></dt><dd data-t="kHrsV">Senin – Jumat, 08.00 – 16.00 WIB</dd></div>
     </dl>
   </div>
 </section>
@@ -356,6 +375,18 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 <footer>© LPK Andalan Talenta Nexa</footer>
 
 <script>
+/* Logo lambang N (navbar dan watermark hero), tanpa tulisan perusahaan */
+var LOGO_N = "data:image/png;base64,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";
+document.querySelectorAll("[data-logo]").forEach(function(i){ i.src = LOGO_N; });
+(function(){
+  var bl = document.querySelector(".brand-logo"), sh = bl && bl.querySelector(".shine");
+  if(!sh || !(window.CSS && (CSS.supports("mask-image","url(x)") || CSS.supports("-webkit-mask-image","url(x)")))) return;
+  var u = 'url("' + LOGO_N + '")';
+  sh.style.webkitMaskImage = u; sh.style.maskImage = u;
+  bl.classList.add("ok");
+})();
+
+/* ===== NAVBAR ===== */
 function toggleMobileNav(){
   const nav=document.getElementById("navLinks"),btn=document.getElementById("burgerBtn"),ov=document.getElementById("navOverlay");
   if(nav.classList.contains("mobileOpen")){closeMobileNav();return;}
@@ -369,7 +400,81 @@ function closeMobileNav(){
   document.getElementById("navOverlay").classList.remove("show");
   document.body.style.overflow="";
 }
-window.addEventListener("resize",function(){if(window.innerWidth>860){closeMobileNav();}});
+window.addEventListener("resize",function(){if(window.innerWidth>980){closeMobileNav();}});
+
+/* ===== BAHASA INDONESIA / JEPANG ===== */
+var TITLE_ID = document.title;
+var TITLE_JA = "LPK Andalan Talenta Nexa — 日本語学習・JFT合格・マッチング";
+var JA = {
+  brandSub:"日本語LPK",
+  nHome:"ホーム", nAbout:"会社概要", nProg:"プログラム", nFlow:"学習の流れ", nProc:"手続き", nContact:"お問い合わせ", nForm:"申込フォーム",
+  h1:"日本語を学び、JFTに合格し、<em>マッチングまでサポート</em>",
+  heroP:"LPK Andalan Talenta Nexaは、基礎学習から日本企業との出会いまで、あなたをサポートします。",
+  heroB1:"申込フォームに記入", heroB2:"プログラムを見る",
+  aTitle:"会社概要",
+  aP1:"Andalan Talenta NEXAは、海外、特に日本でのキャリアを目指す人材に向けて、語学力、職場文化、メンタル面の準備を支援する人材育成・研修機関です。",
+  aP2:"集中的な日本語研修、人格形成、海外実習の準備を通じて、インドネシアの若者の可能性と国際的な機会をつなぐことを目指しています。",
+  vTitle:"ビジョン",
+  vP:"日本語に堪能で、競争力が高く、グローバルな職場に対応できるプロフェッショナル人材を育成する、優れた研修機関になること。",
+  mTitle:"ミッション",
+  m1:"業界基準と日本での実習ニーズに沿った、集中的で体系的な日本語研修を実施する。",
+  m2:"語学力、日本の職場文化の理解、仕事への心構えの面から、参加者を総合的に準備する。",
+  m3:"継続的で透明性のある協力を通じて、実習希望者と日本の受入企業をつなぐ信頼できる橋渡し役となる。",
+  pTitle:"あなたに合ったプログラムを選ぼう",
+  pSub:"就職まで一貫して学びたい方も、まずはJFT合格に集中したい方も、どちらにも対応しています。",
+  p1h:"マッチングまで学ぶ",
+  p1p:"ゼロから始めて日本で働きたい方のための総合プログラム。",
+  p1a:"日本語を基礎から学ぶ", p1b:"日本の職場文化とマナーの研修", p1c:"書類準備と面接練習", p1d:"企業とのマッチングをサポート",
+  p2h:"JFT合格プログラム",
+  p2p:"JFT-Basic試験の準備に集中します。",
+  p2a:"語彙・文法・漢字の教材", p2b:"オンラインでの段階的な問題練習", p2c:"模擬試験", p2d:"講師との問題解説",
+  fTitle:"学習の流れ",
+  fSub:"お申し込みから企業との出会いまでの5ステップ。",
+  s1h:"フォームに記入", s1p:"申込フォームのボタンから個人情報を入力します。",
+  s2h:"日本語を学ぶ", s2p:"基礎から、毎日の教材と練習で始めます。",
+  s3h:"練習してJFT合格", s3p:"問題練習と模擬試験で理解を深めます。",
+  s4h:"就職準備", s4p:"書類、職場マナー、面接を準備します。",
+  s5h:"マッチング", s5p:"企業との出会いをサポートします。",
+  prTitle:"日本への実習手続き",
+  prSub:"募集から日本への出発までの10段階。",
+  q1h:"募集", q1a:"学習指導", q1b:"規律とメンタルの訓練", q1c:"数学の指導", q1d:"書類確認",
+  q2h:"MCU前検診", q2p:"日本語研修の前に行う事前健康診断(Klinik REDY Solo)。",
+  q3h:"3か月の日本語研修", q3a:"ひらがなとカタカナ", q3b:"日本語 第1〜25課", q3c:"基本語彙", q3d:"規律とメンタル", q3e:"面接の事前練習",
+  q4h:"SOテスト(Mendan)", q4a:"日本語と数学のテスト", q4b:"基本会話", q4c:"アンケートとCVの記入",
+  q5h:"日本側企業との面接", q5p:"オンライン、またはジャカルタで実施。宿泊費はLPKが負担します。",
+  q6h:"MCU", q6p:"全項目の健康診断。",
+  q7h:"書類手続き", q7p:"書類の再確認。",
+  q8h:"パスポート取得", q8p:"オンライン申請をご案内します。",
+  q9h:"SO研修", q9a:"日本語の仕上げ", q9b:"日本の文化", q9c:"規律とメンタル", q9d:"態度と体力",
+  q10h:"日本へ出発", q10p:"参加者は受入企業へ向けて出発します。",
+  ctaH:"学習を始める準備はできましたか?",
+  ctaP:"今すぐフォームに記入してください。チームが最適なプログラム選びをお手伝いします。",
+  ctaB:"今すぐ申込フォームへ",
+  kTitle:"お問い合わせ",
+  kSub:"プログラムやお申し込みについてご質問がありますか?直接お越しいただくか、横の連絡先までご連絡ください。",
+  kB1:"WhatsAppでチャット", kB2:"メールを送る",
+  kAddr:"住所", kWa:"WhatsApp / 電話", kMail:"メール", kHrs:"営業時間",
+  kHrsV:"月〜金 8:00〜16:00(WIB)"
+};
+function setLang(l){
+  document.querySelectorAll("[data-t]").forEach(function(el){
+    if(!el.hasAttribute("data-orig")) el.setAttribute("data-orig", el.innerHTML);
+    var k = el.getAttribute("data-t");
+    el.innerHTML = (l === "ja" && JA[k]) ? JA[k] : el.getAttribute("data-orig");
+  });
+  document.documentElement.lang = l;
+  document.title = (l === "ja") ? TITLE_JA : TITLE_ID;
+  document.querySelectorAll(".lang button").forEach(function(b){
+    b.setAttribute("aria-pressed", b.getAttribute("data-lang") === l ? "true" : "false");
+  });
+  try{ localStorage.setItem("nexaLang", l); }catch(e){}
+}
+document.querySelectorAll(".lang button").forEach(function(b){
+  b.addEventListener("click", function(){ setLang(b.getAttribute("data-lang")); });
+});
+var startLang = "id";
+try{ startLang = localStorage.getItem("nexaLang") === "ja" ? "ja" : "id"; }catch(e){}
+setLang(startLang);
 </script>
 
 </body>
