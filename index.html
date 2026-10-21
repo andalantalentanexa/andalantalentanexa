@@ -105,6 +105,26 @@ a{color:inherit;}
   .step{padding:0 0 0 66px;min-height:44px;}
 }
 
+/* PROSEDUR PEMAGANGAN */
+.proc{list-style:none;counter-reset:p;display:grid;grid-template-columns:1fr 1fr;gap:0 56px;}
+.proc > li{counter-increment:p;position:relative;padding:24px 0 24px 64px;border-top:1px solid var(--line);}
+.proc > li:nth-last-child(-n+2){border-bottom:1px solid var(--line);}
+.proc > li::before{content:counter(p);position:absolute;left:0;top:22px;width:44px;height:44px;border-radius:50%;background:#fff;border:1.5px solid var(--navy);color:var(--navy);font-weight:800;display:grid;place-items:center;}
+.proc > li:last-child::before{background:var(--navy);color:#fff;}
+.proc h3{font-weight:800;font-size:1.05rem;line-height:1.35;margin-bottom:6px;}
+.proc .tag{display:inline-block;font-size:.78rem;font-weight:700;color:var(--teal);margin-bottom:6px;}
+.proc .det{list-style:none;}
+.proc .det li{position:relative;padding:3px 0 3px 16px;font-size:.9rem;color:var(--soft);}
+.proc .det li::before{content:"";position:absolute;left:0;top:.82em;width:6px;height:1.5px;background:var(--teal);}
+.proc p{font-size:.9rem;color:var(--soft);}
+@media(max-width:860px){
+  .proc{grid-template-columns:1fr;}
+  .proc > li:nth-last-child(2){border-bottom:0;}
+}
+@media(min-width:861px) and (max-width:1060px){
+  .nav-links a{padding:10px 11px;font-size:.88rem;}
+}
+
 /* CTA */
 .cta{max-width:1160px;margin:96px auto 0;padding:0 22px;}
 .ctaBox{background:var(--navy);color:#fff;border-radius:24px;padding:52px 40px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
@@ -148,6 +168,7 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
       <a href="#tentang" onclick="closeMobileNav()">Tentang</a>
       <a href="#program" onclick="closeMobileNav()">Program</a>
       <a href="#alur" onclick="closeMobileNav()">Alur Belajar</a>
+      <a href="#prosedur" onclick="closeMobileNav()">Prosedur</a>
       <a href="#kontak" onclick="closeMobileNav()">Kontak</a>
       <!-- Ganti href di bawah dengan link formulir pendaftaran (mis. Google Form) -->
       <a href="formulir.html" class="nav-cta">Isi Formulir</a>
@@ -158,7 +179,7 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 
 <section class="hero" id="beranda">
   <div class="hero-inner">
-    <img class="hero-mark" src="images/LOGO NEXA-NO BACKGROUND.png" alt="" aria-hidden="true">
+    <img class="hero-mark" src="logo.png" alt="" aria-hidden="true">
     <h1>Belajar bahasa Jepang, lulus JFT, lalu <em>dibantu matching job</em></h1>
     <p>LPK Andalan Talenta Nexa mendampingi kamu dari belajar dasar sampai bertemu perusahaan di Jepang.</p>
     <div class="hero-cta">
@@ -227,6 +248,75 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
     <li class="step"><h3>Latihan dan lulus JFT</h3><p>Perdalam materi lewat latihan soal dan simulasi.</p></li>
     <li class="step"><h3>Persiapan kerja</h3><p>Siapkan berkas, etika kerja, dan wawancara.</p></li>
     <li class="step"><h3>Matching job</h3><p>Dibantu dipertemukan dengan perusahaan.</p></li>
+  </ol>
+</section>
+
+<section class="wrap" id="prosedur">
+  <h2>Prosedur pemagangan ke Jepang</h2>
+  <p class="sub">Sepuluh tahap dari perekrutan sampai berangkat ke Jepang.</p>
+
+  <ol class="proc">
+    <li>
+      <h3>Perekrutan</h3>
+      <span class="tag">LPK NEXA</span>
+      <ul class="det">
+        <li>Bimbingan belajar</li>
+        <li>Berlatih disiplin dan mental</li>
+        <li>Bimbingan matematika</li>
+        <li>Pengecekan berkas</li>
+      </ul>
+    </li>
+    <li>
+      <h3>Pra MCU</h3>
+      <p>Pra medical sebelum pelatihan bahasa (Klinik REDY Solo).</p>
+    </li>
+    <li>
+      <h3>Pelatihan bahasa 3 bulan</h3>
+      <ul class="det">
+        <li>Hiragana dan katakana</li>
+        <li>Bahasa Jepang Bab 1–25</li>
+        <li>Kosakata dasar</li>
+        <li>Disiplin dan mental</li>
+        <li>Pra interview</li>
+      </ul>
+    </li>
+    <li>
+      <h3>Test SO (Mendan)</h3>
+      <ul class="det">
+        <li>Tes bahasa Jepang dan MTK</li>
+        <li>Percakapan dasar</li>
+        <li>Pengisian angket dan CV</li>
+      </ul>
+    </li>
+    <li>
+      <h3>Wawancara user Jepang</h3>
+      <p>Online atau offline di Jakarta. Akomodasi ditanggung LPK.</p>
+    </li>
+    <li>
+      <h3>MCU</h3>
+      <p>Pemeriksaan kesehatan full.</p>
+    </li>
+    <li>
+      <h3>Pemberkasan</h3>
+      <p>Pengecekan ulang dokumen.</p>
+    </li>
+    <li>
+      <h3>Pembuatan paspor</h3>
+      <p>Dipandu pendaftaran paspor online.</p>
+    </li>
+    <li>
+      <h3>Diklat SO</h3>
+      <ul class="det">
+        <li>Pemantapan bahasa Jepang</li>
+        <li>Budaya Jepang</li>
+        <li>Disiplin dan mental</li>
+        <li>Sikap dan fisik</li>
+      </ul>
+    </li>
+    <li>
+      <h3>Berangkat ke Jepang</h3>
+      <p>Peserta berangkat menuju perusahaan penerima.</p>
+    </li>
   </ol>
 </section>
 
