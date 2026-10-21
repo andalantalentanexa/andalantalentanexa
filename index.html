@@ -29,37 +29,34 @@ a{color:inherit;}
 .brand-text{display:flex;flex-direction:column;line-height:1.15;}
 .brand-text b{font-weight:800;font-size:1.02rem;}
 .brand-text span{font-size:.72rem;color:var(--soft);}
-.nav-links{display:flex;align-items:center;gap:4px;flex:1;margin-left:20px;}
-.nav-links a{text-decoration:none;font-weight:700;font-size:.92rem;padding:10px 15px;border-radius:999px;white-space:nowrap;}
-.nav-links a:hover{background:var(--tint);}
-.nav-links .push{margin-left:auto;}
-.nav-links a.nav-cta{background:var(--navy);color:#fff;margin-left:8px;}
-.nav-links a.nav-cta:hover{background:var(--teal);}
-.lang{display:flex;flex:none;border:1.5px solid var(--navy);border-radius:999px;padding:2px;margin-left:10px;}
-.lang button{border:0;background:transparent;font:inherit;font-weight:700;font-size:.8rem;line-height:1;padding:7px 12px;border-radius:999px;cursor:pointer;color:var(--navy);}
+.brand{margin-right:auto;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-cta{text-decoration:none;font-weight:700;font-size:.92rem;padding:12px 22px;border-radius:999px;background:var(--navy);color:#fff;white-space:nowrap;transition:.18s;}
+.nav-cta:hover{background:var(--teal);}
+.lang{display:flex;flex:none;border:1.5px solid var(--navy);border-radius:999px;padding:2px;}
+.lang button{border:0;background:transparent;font:inherit;font-weight:700;font-size:.8rem;line-height:1;padding:8px 12px;border-radius:999px;cursor:pointer;color:var(--navy);}
 .lang button[aria-pressed="true"]{background:var(--navy);color:#fff;}
-.burger-btn{display:none;flex:none;width:46px;height:46px;border:2px solid var(--navy);border-radius:50%;background:#fff;cursor:pointer;align-items:center;justify-content:center;gap:4px;flex-direction:column;position:relative;z-index:1001;margin-left:auto;}
-.burger-btn span{display:block;width:20px;height:2px;background:var(--navy);border-radius:2px;transition:.25s ease;}
-.burger-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
-.burger-btn.open span:nth-child(2){opacity:0;}
-.burger-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.menu-btn{display:flex;align-items:center;gap:9px;height:44px;padding:0 17px 0 15px;border:1.5px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);font:inherit;font-weight:700;font-size:.92rem;cursor:pointer;position:relative;z-index:1001;}
+.menu-btn .bars{display:flex;flex-direction:column;gap:4px;}
+.menu-btn .bars span{display:block;width:18px;height:2px;background:var(--navy);border-radius:2px;transition:.25s ease;}
+.menu-btn.open .bars span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.menu-btn.open .bars span:nth-child(2){opacity:0;}
+.menu-btn.open .bars span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.nav-links{position:fixed;top:0;right:0;height:100vh;width:min(82vw,330px);background:#fff;display:flex;flex-direction:column;gap:8px;padding:88px 20px 24px;transform:translateX(100%);visibility:hidden;transition:transform .28s ease,visibility 0s .28s;z-index:1000;overflow-y:auto;box-shadow:-10px 0 30px rgba(0,42,77,.25);}
+.nav-links.mobileOpen{transform:translateX(0);visibility:visible;transition:transform .28s ease,visibility 0s 0s;}
+.nav-links a{text-decoration:none;font-weight:700;padding:15px 18px;font-size:1rem;border-radius:14px;background:var(--tint);}
+.nav-links a:hover{background:var(--line);}
 .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,42,77,.5);z-index:998;}
 .nav-overlay.show{display:block;}
-@media(min-width:981px) and (max-width:1120px){
-  .nav-links{margin-left:8px;}
-  .nav-links a{padding:10px 9px;font-size:.84rem;}
-  .lang{margin-left:6px;}
+@media(max-width:560px){
+  .navbar-inner{padding:8px 14px;gap:8px;}
+  .nav-right{gap:6px;}
+  .nav-cta{padding:10px 13px;font-size:.82rem;}
+  .lang button{padding:7px 9px;}
+  .menu-btn{padding:0 13px;}
+  .menu-btn b{display:none;}
 }
-@media(max-width:980px){
-  .burger-btn{display:flex;}
-  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(82vw,330px);background:#fff;flex-direction:column;align-items:stretch;gap:8px;padding:88px 20px 24px;margin-left:0;flex:none;transform:translateX(100%);transition:transform .28s ease;z-index:1000;overflow-y:auto;box-shadow:-10px 0 30px rgba(0,42,77,.25);}
-  .nav-links.mobileOpen{transform:translateX(0);}
-  .nav-links a{padding:15px 18px;font-size:1rem;border-radius:14px;background:var(--tint);}
-  .nav-links .push{margin-left:0;}
-  .nav-links a.nav-cta{margin:10px 0 0;text-align:center;background:var(--navy);}
-  .lang{align-self:flex-start;margin:6px 0 0;}
-  .lang button{font-size:.9rem;padding:9px 16px;}
-}
+@media(max-width:470px){.brand-text{display:none;}}
 
 /* HERO */
 .hero{position:relative;overflow:hidden;}
@@ -177,22 +174,24 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
       <span class="brand-text"><b>Andalan Talenta Nexa</b><span data-t="brandSub">LPK Bahasa Jepang</span></span>
     </a>
 
-    <button class="burger-btn" id="burgerBtn" type="button" aria-label="Menu" aria-expanded="false" onclick="toggleMobileNav()">
-      <span></span><span></span><span></span>
-    </button>
-
-    <div class="nav-links" id="navLinks">
-      <a href="#beranda" class="push" onclick="closeMobileNav()" data-t="nHome">Beranda</a>
-      <a href="#tentang" onclick="closeMobileNav()" data-t="nAbout">Tentang</a>
-      <a href="#program" onclick="closeMobileNav()" data-t="nProg">Program</a>
-      <a href="#alur" onclick="closeMobileNav()" data-t="nFlow">Alur Belajar</a>
-      <a href="#prosedur" onclick="closeMobileNav()" data-t="nProc">Prosedur</a>
-      <a href="#kontak" onclick="closeMobileNav()" data-t="nContact">Kontak</a>
+    <div class="nav-right">
       <div class="lang" role="group" aria-label="Bahasa / 言語">
         <button type="button" data-lang="id" aria-pressed="true">ID</button>
         <button type="button" data-lang="ja" aria-pressed="false" lang="ja">日本語</button>
       </div>
       <a href="formulir.html" class="nav-cta" data-t="nForm">Isi Formulir</a>
+      <button class="menu-btn" id="burgerBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="toggleMobileNav()">
+        <span class="bars"><span></span><span></span><span></span></span><b data-t="nMenu">Menu</b>
+      </button>
+    </div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#beranda" onclick="closeMobileNav()" data-t="nHome">Beranda</a>
+      <a href="#tentang" onclick="closeMobileNav()" data-t="nAbout">Tentang</a>
+      <a href="#program" onclick="closeMobileNav()" data-t="nProg">Program</a>
+      <a href="#alur" onclick="closeMobileNav()" data-t="nFlow">Alur Belajar</a>
+      <a href="#prosedur" onclick="closeMobileNav()" data-t="nProc">Prosedur</a>
+      <a href="#kontak" onclick="closeMobileNav()" data-t="nContact">Kontak</a>
     </div>
   </div>
   <div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
@@ -367,7 +366,7 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
       <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span data-t="kMail">Email</span></dt><dd><a href="mailto:andalantalentanexa@gmail.com">andalantalentanexa@gmail.com</a></dd></div>
       <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span>Instagram</span></dt><dd><a href="https://www.instagram.com/andalantalentanexa" target="_blank" rel="noopener">Andalan Talenta Nexa</a></dd></div>
       <div class="cRow"><dt><svg class="ico fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg><span>TikTok</span></dt><dd><a href="https://www.tiktok.com/@andalantalentanexa" target="_blank" rel="noopener">Andalan Talenta Nexa</a></dd></div>
-      <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-t="kHrs">Jam layanan</span></dt><dd data-t="kHrsV">Senin – Jumat, 08.00 – 16.00 WIB</dd></div>
+      <div class="cRow"><dt><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-t="kHrs">Jam layanan</span></dt><dd data-t="kHrsV">Senin – Jumat, 08.00 – 17.00 WIB</dd></div>
     </dl>
   </div>
 </section>
@@ -400,14 +399,14 @@ function closeMobileNav(){
   document.getElementById("navOverlay").classList.remove("show");
   document.body.style.overflow="";
 }
-window.addEventListener("resize",function(){if(window.innerWidth>980){closeMobileNav();}});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeMobileNav();}});
 
 /* ===== BAHASA INDONESIA / JEPANG ===== */
 var TITLE_ID = document.title;
 var TITLE_JA = "LPK Andalan Talenta Nexa — 日本語学習・JFT合格・マッチング";
 var JA = {
   brandSub:"日本語LPK",
-  nHome:"ホーム", nAbout:"会社概要", nProg:"プログラム", nFlow:"学習の流れ", nProc:"手続き", nContact:"お問い合わせ", nForm:"申込フォーム",
+  nMenu:"メニュー", nHome:"ホーム", nAbout:"会社概要", nProg:"プログラム", nFlow:"学習の流れ", nProc:"手続き", nContact:"お問い合わせ", nForm:"申込フォーム",
   h1:"日本語を学び、JFTに合格し、<em>マッチングまでサポート</em>",
   heroP:"LPK Andalan Talenta Nexaは、基礎学習から日本企業との出会いまで、あなたをサポートします。",
   heroB1:"申込フォームに記入", heroB2:"プログラムを見る",
