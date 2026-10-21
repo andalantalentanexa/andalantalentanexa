@@ -444,7 +444,7 @@ form.addEventListener("submit", async function(e){
   btn.disabled = true; btn.textContent = "Membuat PDF...";
   try{
     pdfBlob = await buildPdf(data);
-    pdfName = "Formulir-NEXA-" + slug(data.nama) + ".pdf";
+    pdfName = "FORM PENDAFTARAN- " + data.nama.replace(/[\\\/:*?"<>|]+/g," ").replace(/\s+/g," ").trim() + ".pdf";
     pdfText = "Halo Admin LPK Andalan Talenta Nexa, saya " + data.nama +
       " ingin mendaftar program \"" + data.program + "\". Berikut formulir pendaftaran siswa saya dalam bentuk PDF.";
     document.getElementById("resultName").textContent = pdfName + " (" + Math.max(1, Math.round(pdfBlob.size/1024)) + " KB)";
