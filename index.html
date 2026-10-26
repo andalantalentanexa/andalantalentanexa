@@ -60,24 +60,24 @@ a{color:inherit;}
 }
 
 /* HERO */
-.hero{position:relative;overflow:hidden;background:#1f677f;color:#fff;}
+.hero{position:relative;overflow:hidden;background:#0b4f66;color:#fff;}
 .hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0;}
-.hero-bg .kanji{position:absolute;left:-1vw;bottom:-3vw;font-weight:800;font-size:clamp(8rem,24vw,20rem);line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.12);white-space:nowrap;}
+.hero-bg .kanji{position:absolute;left:-1vw;bottom:-3vw;font-weight:800;font-size:clamp(8rem,24vw,20rem);line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.1);white-space:nowrap;}
 .hero-inner{max-width:1160px;margin:0 auto;padding:92px 22px 100px;position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:7px 14px;border-radius:999px;margin-bottom:22px;}
-.eyebrow::before{content:"";width:8px;height:8px;background:#bfe9f5;transform:rotate(45deg);}
-.hero h1{font-weight:800;font-size:clamp(2.3rem,5vw,3.9rem);line-height:1.08;letter-spacing:-.02em;margin-bottom:20px;color:#fff;}
-.hero h1 em{font-style:normal;color:#bfe9f5;}
-.hero-text > p{color:#d4e8ef;font-size:1.08rem;max-width:500px;margin-bottom:30px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:999px;margin-bottom:22px;}
+.eyebrow svg{width:16px;height:16px;flex:none;fill:none;stroke:#A9D3C0;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.hero h1{font-weight:800;font-size:clamp(2.4rem,5.2vw,4.1rem);line-height:1.08;letter-spacing:-.02em;margin-bottom:20px;color:#fff;}
+.hero h1 em{font-style:normal;color:#E9DDB5;}
+.hero-text > p{color:#cfe3e8;font-size:1.08rem;max-width:500px;margin-bottom:30px;}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;}
 .hero .btn-navy{background:#fff;color:var(--navy);}
 .hero .btn-navy:hover{background:#dfe9f0;}
-.hero .btn-line{border-color:rgba(255,255,255,.6);color:#fff;}
+.hero .btn-line{border-color:rgba(255,255,255,.7);color:#fff;}
 .hero .btn-line:hover{background:#fff;color:var(--navy);}
 .hero-facts{list-style:none;display:flex;gap:30px;flex-wrap:wrap;margin-top:40px;}
-.hero-facts li{display:flex;flex-direction:column;}
-.hero-facts b{font-weight:800;font-size:1.5rem;color:#fff;line-height:1.2;}
-.hero-facts span{font-size:.82rem;color:#d4e8ef;}
+.hero-facts li{display:flex;flex-direction:column;background:#fff;border-radius:16px;padding:12px 18px;box-shadow:0 10px 24px rgba(0,42,77,.14);}
+.hero-facts b{font-weight:800;font-size:1.5rem;color:var(--navy);line-height:1.2;}
+.hero-facts span{font-size:.8rem;color:var(--soft);}
 
 .hero-visual{position:relative;display:grid;place-items:center;}
 .globe-wrap{position:relative;width:min(100%,430px);aspect-ratio:1;}
@@ -85,16 +85,23 @@ a{color:inherit;}
 .ring{transform-origin:200px 200px;animation:spin 26s linear infinite;}
 .ring text{font-family:"Plus Jakarta Sans","Noto Sans JP",sans-serif;font-weight:800;font-size:23px;fill:#fff;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.jp-land{fill:#f4fafc;stroke:#fff;stroke-width:.6;stroke-linejoin:round;filter:drop-shadow(0 10px 18px rgba(0,42,77,.45));}
-.pulse{fill:none;stroke:#002a4d;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:ping 2.2s ease-out infinite;}
+.jp-land{fill:#eef6f3;stroke:#fff;stroke-width:.8;stroke-linejoin:round;filter:drop-shadow(7px 9px 0 rgba(0,0,0,.28));animation:pop .9s cubic-bezier(.2,.8,.2,1) both;transform-origin:125px 125px;}
+.pin{fill:#0b4f66;stroke:#fff;stroke-width:1.5;}
+.tag{fill:#fff;filter:drop-shadow(0 3px 6px rgba(0,42,77,.35));}
+.tagt{font-family:"Noto Sans JP","Plus Jakarta Sans",sans-serif;font-weight:800;font-size:11px;fill:#002a4d;}
+@keyframes pop{from{opacity:0;transform:scale(.88);}to{opacity:1;transform:none;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:none;}}
+.hero-text > *{animation:fadeUp .7s ease both;}
+.hero-text > *:nth-child(2){animation-delay:.08s;}.hero-text > *:nth-child(3){animation-delay:.16s;}.hero-text > *:nth-child(4){animation-delay:.24s;}.hero-text > *:nth-child(5){animation-delay:.32s;}
+.pulse{fill:rgba(255,255,255,.45);stroke:#fff;stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:ping 2.4s ease-out infinite;}
 @keyframes ping{0%{transform:scale(.6);opacity:.9;}100%{transform:scale(3.2);opacity:0;}}
 
 .strip{position:relative;z-index:1;overflow:hidden;padding:14px 0;}
 .strip-track{display:flex;width:max-content;animation:marq 28s linear infinite;}
-.strip-track span{flex:none;padding:0 26px;font-weight:800;font-size:1rem;letter-spacing:.06em;color:#d4e8ef;white-space:nowrap;}
-.strip-track span::after{content:"◆";margin-left:52px;color:#bfe9f5;font-size:.6rem;vertical-align:middle;}
+.strip-track span{flex:none;padding:0 26px;font-weight:800;font-size:1rem;letter-spacing:.06em;color:#cfe3e8;white-space:nowrap;}
+.strip-track span::after{content:"◆";margin-left:52px;color:#A9D3C0;font-size:.6rem;vertical-align:middle;}
 @keyframes marq{to{transform:translateX(-50%);}}
-@media(prefers-reduced-motion:reduce){.ring,.pulse,.strip-track{animation:none!important;}}
+@media(prefers-reduced-motion:reduce){.ring,.pulse,.strip-track,.jp-land,.hero-text > *{animation:none!important;}}
 
 .btn{display:inline-block;text-decoration:none;padding:15px 28px;border-radius:999px;font-weight:700;font-size:.96rem;transition:.18s;border:1.5px solid transparent;cursor:pointer;}
 .btn-navy{background:var(--navy);color:#fff;}
@@ -173,6 +180,34 @@ a{color:inherit;}
 .nBody h3{font-weight:800;font-size:1.05rem;line-height:1.35;}
 .nBody p{font-size:.9rem;color:var(--soft);}
 
+/* MITRA DAN LULUSAN */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:56px;}
+.stat{border:1px solid var(--line);border-top:4px solid var(--navy);border-radius:18px;padding:24px 22px;background:#fff;}
+.stat:nth-child(2){border-top-color:var(--teal);}
+.stat:nth-child(3){border-top-color:#0b4f66;}
+.stat b{display:block;font-weight:800;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.1;letter-spacing:-.02em;}
+.stat span{color:var(--soft);font-size:.95rem;}
+.subh{font-weight:800;font-size:1.25rem;margin:0 0 18px;}
+.coGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-bottom:56px;}
+.coCard{display:flex;gap:14px;align-items:center;border:1px solid var(--line);border-radius:18px;padding:18px;background:#fff;transition:transform .2s,box-shadow .2s;}
+.coCard:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,42,77,.12);}
+.coLogo{flex:none;width:56px;height:56px;border-radius:14px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1.3rem;overflow:hidden;}
+.coLogo img{width:100%;height:100%;object-fit:contain;background:#fff;}
+.coCard h4{font-weight:800;font-size:1rem;line-height:1.3;}
+.coCard p{font-size:.85rem;color:var(--soft);}
+.coCnt{display:inline-block;margin-top:6px;font-size:.76rem;font-weight:800;background:#e6f2f6;color:var(--teal);padding:3px 10px;border-radius:999px;}
+.stList{border-top:1px solid var(--line);}
+.stRow{display:grid;grid-template-columns:44px 1.3fr 1.3fr 1fr 70px;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);font-size:.95rem;}
+.stRow.head{font-size:.78rem;font-weight:700;color:var(--soft);padding:12px 0;}
+.stRow .no{color:var(--teal);font-weight:800;}
+.stRow .nm{font-weight:700;}
+@media(max-width:860px){
+  .stats{grid-template-columns:1fr;}
+  .stRow{grid-template-columns:36px 1fr;gap:4px 12px;}
+  .stRow.head{display:none;}
+  .stRow > div:nth-child(n+3){grid-column:2;font-size:.88rem;color:var(--soft);}
+}
+
 /* PROSEDUR PEMAGANGAN */
 .proc{list-style:none;counter-reset:p;display:grid;grid-template-columns:1fr 1fr;gap:0 56px;}
 .proc > li{counter-increment:p;position:relative;padding:24px 0 24px 64px;border-top:1px solid var(--line);}
@@ -245,6 +280,7 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
       <a href="#program" onclick="closeMobileNav()" data-t="nProg">Program</a>
       <a href="#alur" onclick="closeMobileNav()" data-t="nFlow">Alur Belajar</a>
       <a href="#berita" onclick="closeMobileNav()" data-t="nNews">Kabar</a>
+      <a href="#mitra" onclick="closeMobileNav()" data-t="nPartner">Mitra</a>
       <a href="#prosedur" onclick="closeMobileNav()" data-t="nProc">Prosedur</a>
       <a href="#kontak" onclick="closeMobileNav()" data-t="nContact">Kontak</a>
       <div class="lang drawer-only" role="group" aria-label="Bahasa / 言語">
@@ -261,7 +297,7 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
   <div class="hero-bg" aria-hidden="true"><span class="kanji" lang="ja">日本語</span></div>
   <div class="hero-inner">
     <div class="hero-text">
-      <span class="eyebrow" data-t="eyebrow">LPK Bahasa Jepang · Boyolali</span>
+      <span class="eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-t="eyebrow">Boyolali, Jawa Tengah</span></span>
       <h1 data-t="h1">Belajar bahasa Jepang, lulus JFT, lalu <em>dibantu matching job</em></h1>
       <p data-t="heroP">LPK Andalan Talenta Nexa mendampingi kamu dari belajar dasar sampai bertemu perusahaan di Jepang.</p>
       <div class="hero-cta">
@@ -283,12 +319,11 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
           </defs>
           <g transform="translate(200 200) scale(.9) translate(-125 -125)">
             <path class="jp-land" d="M74.9,159.8L74.3,160.4L73.2,160.2L72.5,159.3L72.8,158.3L73.9,157.6L75,159.1ZM139.3,133.5L138.1,133.6L137.8,133.4L138.5,133L138.5,132.3L139,131.1L139,130.8L138,130.7L138.1,129.3L138.8,128L140.8,125.8L141.3,125.4L141.4,126.4L140.8,128.6L140.7,129.4L142.3,129.5L141.2,132.2ZM95.1,190.2L93.7,191.5L92.5,191.4L91.9,190.8L91.7,190.1L92.9,188.9L93.8,187.3L94.7,186.5L95.5,186.1L96,186.2L94.8,188.4ZM43.7,249.8L42.5,250L42.5,249.1L43.4,247.2L43.5,245.7L44.3,243.9L44.7,243.5L45,243.3L45.3,243.9L44.9,246.1L44.1,247.8ZM32.3,222.1L31.3,222.6L31.1,222.1L30.7,221.8L31.5,221.1L31.5,220.8L30.9,220.3L31.5,218.4L31.4,217.6L33.4,217.3L33.8,218L33.8,220.4ZM21.9,192.7L21.1,193.4L20.7,192.4L21.1,189.6L22.6,190.2L22.6,191.1ZM23.3,189.1L23,189.9L22.1,189.4L21.8,188.9L22.5,186.5L22.5,185.6L22.5,185.1L24.1,183.9L24.4,184.1L24.5,184.5L24.4,185L24.5,186.2L23.2,188.1ZM14,213.5L14.4,213.9L15.2,213.7L15.8,213.7L16.2,213.9L16.7,214.9L16.9,215.6L16,215.7L15.6,215.8L15,216.6L14.3,216.3L13.8,215.9L13.7,215.4ZM36.2,219.1L35,219.2L34.5,219L34.3,218.5L36,217.5L37.2,217.7L36.7,218.6ZM177.5,7.2L176.6,7.3L175.6,6.6L175.4,5.6L176.2,4.8L177,5.1L177.7,6.1L177.9,6.6ZM154,61.5L153.7,61.6L153.4,61.5L153.1,60.2L153.4,59.5L154.2,59L155,58.8L154.3,61.3ZM87.6,187.1L87.4,187.4L87.1,187.3L86.3,188L86.1,187.4L85.5,186.9L85.4,186.5L87.3,186.3L87.9,186.5ZM19.3,212.7L19,212.8L18.5,211.4L18.3,211L18.7,210.7L19.7,208.2L19.9,209.2L20.3,210.1L20.6,210.3L20.3,211L19.7,211.3ZM24.6,206.8L23.8,207.5L23.1,207.5L23.7,206.6L23.8,206.2L24.3,205.1L25.3,204.7L25.7,204.6L24.9,205.8ZM60.6,195.5L61.2,196.1L62.7,195.9L62.9,196L62.5,196.5L61.8,197.1L60.6,196.7L59.8,196.6L59.8,195.8L59.8,195.5ZM210.2,25.4L211.9,25.5L212.6,25.5L213.8,25.7L218.8,28.5L220.3,28.8L221.8,28.8L222.9,28.6L223.8,27.9L226.8,24.5L229.9,21.5L230.3,21.6L230.3,22.5L230.1,23.4L228.7,26.2L227.1,29.9L226.8,31.8L227.3,33.6L228.2,35.1L229,37.2L229.9,40L231.1,40.4L231.8,40.4L233,39.6L234.2,38.5L235.2,38.4L236.3,38.6L234.9,39.3L233.6,40.2L232.4,42L232,42.3L230.7,42.2L230,42.3L228.5,43L227.1,43.8L225.9,44.8L224.5,45.4L223,45.5L220.7,46.3L219.2,46.4L216.5,45.7L215.1,45.9L212.2,47.5L209.5,49.8L207.1,52.5L205.2,55.6L204.4,57.3L203.9,59.1L203.8,60.3L203.6,61.5L203.2,62.3L202.7,63L201,62.6L198.4,60.9L193.2,58.4L187.8,54.7L184.7,52.8L179,53.4L173.5,57L173,56.7L170.9,54.2L169.9,53.2L168.7,53L167.8,53L166.9,53.2L165.7,54.4L165.3,55.3L164.9,56.4L164.8,57.1L165,57.8L166.1,59.4L167.6,60.7L168.2,60.9L169.6,60.8L170.2,60.9L172.5,63.4L175.1,65.6L175.7,66.3L174.7,67.1L173.7,67.5L172.5,67.4L171.3,67.1L169.3,66.2L168.4,67L167.1,68.7L166.3,70.5L165.7,71.3L164.2,72.4L162.6,73L161.9,72.8L161.2,72.1L160.9,71.3L160.7,70.3L161,68.2L161.8,66.4L162.1,64.5L161.5,61.8L161.1,61.2L159.4,59.6L158.6,58.1L158.4,56.2L158.5,55.1L158.9,52.8L159.3,51.6L160.1,51.2L160.9,50.9L162.2,50.1L163.6,49L165,47.8L166.3,46.2L167,44.5L165.9,42.4L165.6,41.2L165.8,40L167,39.4L168.3,39.9L170.9,41.6L171.4,41.7L173.1,41.8L175.5,42.2L176.9,42.1L177.5,41.9L178.5,40.4L179,38.6L178.8,36.3L178.8,34L179.5,32.1L181.5,29L182,27.2L182.2,22.8L183,20.8L183.5,18.8L183.8,14.6L183,10.5L182.2,8.4L181.3,6.5L181.4,4.7L182.1,3L182.1,2.5L182.3,2L183.8,1.7L184.4,1.3L185.1,0.5L185.8,0L186.4,0.5L186.8,1.3L188.9,3.4L192,7.1L195.8,12.7L198.1,15.4L200.6,17.9L203.3,20.4L206.2,22.5L208.1,23.5L209.4,25.2ZM46.5,200.9L48.2,201.3L48.9,201.4L49.6,201.2L50.7,200.5L51.7,200.1L52.5,200.3L53.2,200.9L53.6,201.6L53.4,202.4L52.2,204.1L51.1,206L53.5,206.3L55.8,206.3L55.2,207.4L55.2,208.4L55.9,208.9L56.5,209.5L56.3,210L56,210.6L57.2,211.5L57.1,212L56.8,212.6L53.6,216.5L52.7,218.4L52.1,220.6L51.5,222.2L51.1,223.8L50.7,225.5L50.1,227.3L50.3,228.9L50.1,230.6L48.6,234.6L47.4,234.5L46,234.1L45.1,234.1L44.6,235L45.4,236.9L42.9,239.1L40.1,240.5L40.1,239.9L40.4,239.3L40.8,238.9L41.1,238.4L41.5,236.7L41.2,235L40.4,232.8L40.4,232L40.9,231.7L41.3,231.6L41.5,231.3L41.6,230.6L41.3,230L40.5,229.9L39.7,229.8L39.2,230.7L38.4,232.2L38.1,233.8L38.2,234.6L38.5,235.4L39.6,236.7L39.3,237.5L38.9,238L35.3,236.7L34.5,236.6L33.8,236.3L33.1,234.6L34.6,234.1L35,233.9L35.2,233.4L35.4,231.6L34.7,230.2L34.2,229.7L33.6,229.1L34,227.9L33.8,226.3L33.7,224.2L34,223.8L35.4,223.4L36.3,222.2L37.2,220.9L38.5,218.6L39.5,216.1L38.5,216L37.7,215.5L38.6,214.3L38.3,212.8L37,211L36.2,208.8L34.9,207.8L34.3,207.5L33.5,208L32.8,208.6L33.5,210L33.4,211.2L33.5,212.5L34.1,212.6L34.9,212.3L35.5,212.5L35.8,213.1L35.9,214L35.6,214.8L35.1,215.2L34.4,215.2L33.7,214.7L33.2,214.1L31.9,213.7L30.6,214.5L29.3,216L28.2,216.8L28.7,215.7L29,214.4L28.5,213.6L27.2,212.1L26.9,211.3L26.8,210.3L27.1,209.3L28.4,210.4L29,211.9L30,212.5L31.1,212.5L30.2,210.4L29.9,209.9L28.6,208.9L26.9,207.3L25.8,206.6L26.2,204.9L26.8,204.6L27.4,204.6L29.2,205.2L29.4,204.4L29.1,204L29,203.4L30.2,202.7L32.2,202.1L32.6,201.8L32.9,201.2L33.4,200.9L34.8,200.9L36,200.4L36.9,198.8L37.1,198L37.5,197.2L39.9,196L40.5,195.8L42.1,196L43.6,196.7L44.3,198.2L44.9,199.8ZM87.7,190.7L89.5,191.3L91.3,191.1L91.3,194L91.5,194.9L92,195.8L91.8,197.1L92.6,197.5L90.1,198.9L87.9,200.8L87,202.1L86.2,203.4L85.7,204.8L85.4,206.4L84.6,205.8L82.5,203.3L81.2,202.6L79,202.2L78.3,202.3L73.8,204.6L73.2,206.3L72,208.9L71.4,209.8L70.8,210L70.3,210.4L69.8,212.6L68.4,214L67.5,214L66.1,213.7L65.4,213.9L66.3,211.7L64.9,211.5L63.5,211.5L63.5,210.1L62.7,209.3L63.3,208.2L63.3,207.4L63.7,206.9L63.8,206.3L63.8,205.7L62.9,205.5L62.4,205.1L62.5,203.5L62,203.5L60.8,203.8L58.3,204.9L57.6,204.9L58.6,204.1L60.9,202.9L61.8,202.3L64.1,200.4L65.4,199.5L66.2,197.9L66.4,197L66.9,196.1L67.3,194.8L68,194.3L69.3,193.2L70,193.3L70.8,194.7L71.8,195.8L72.6,195.7L74,195.2L74.6,195L76.2,195.1L77.6,194.4L78.2,193.6L78.4,192.6L77.9,190.9L78.6,191L79.2,191L80.8,189.9L82.4,189.2L84,189.1L85.9,189.7ZM176.6,73.8L177.1,74.2L179.6,73.3L179.1,75.9L178.9,78.6L179.1,83L179.2,85L179.7,86.9L180.7,88.3L182,89.2L184,92.3L185.1,96.1L185.8,98L186.3,99.9L186.5,100.8L186.5,101.7L186.4,102.9L186.6,103.8L186.3,106.9L185.4,110.4L185.4,112.2L184.6,112.6L184.1,113.4L183.7,113.8L183.3,114.1L182.6,114.2L182.2,114.5L182,115.4L181.8,116.3L181.2,117.1L180.8,118L180.4,120.2L180.3,122.4L179.8,124L178.5,124.4L177,124.3L175.1,125L174.7,125.5L173.2,128.2L172.8,129.8L172.8,131.4L173.2,133.5L173.7,135.6L174.2,139.3L173.7,145.1L173.3,146.9L172.3,148.2L171.6,148.7L171,149.4L170.2,151.3L168.8,155L168.8,155.9L168.8,156.9L168.4,158.1L168.1,159.3L168.4,160.8L168.8,162.1L170.6,165.5L171.3,166.5L172.1,167.5L169,168.5L168.5,168.9L166.7,170.9L166.1,172.7L166.1,174.7L165.8,175.5L165.4,176.1L164.8,176.5L162.8,177.4L161.5,178.4L160.2,179.8L159.7,180.5L158.7,180.3L158.1,179.6L158.7,178.8L158.5,177.8L158.8,175.3L158.5,174.3L159.5,173.5L160,172.2L161.1,171.3L161.9,170.4L162,169.7L161.3,168.9L160.6,168.3L159.6,168.3L158.6,168.5L158,169.3L157.8,170.3L157.8,170.7L157.7,171.1L156.2,172.5L156.4,173.9L156.9,174.6L157.4,175L157.2,175.4L156.5,176.6L156,176.7L155.1,175.1L153.9,174.2L152.5,174.2L151,174.6L149.9,175.6L149.5,176.5L149.3,177.4L149.4,179.6L148.9,181.5L148,183.1L147.5,183.7L146.5,184.8L145.7,185L145.1,184.5L144.7,183.7L145.3,180.9L145.2,179.4L146.5,178.6L145.4,177.4L144.1,177L142.3,177.6L141.8,178.3L141.4,179.2L140.5,180.3L139.3,181.4L138.1,183.2L137.3,185.3L134.6,184.6L133.1,184.5L131.6,184.5L128.9,184.3L126,184.7L122.7,185.5L122.9,184.9L125.6,183.6L125.7,183.3L125.4,182.5L124.8,182.5L123.2,182.8L122.3,182.7L121.9,181.9L121.4,181.6L121.1,181.9L121.2,183.4L120.7,183.6L120.2,183.2L120.4,182L120,180.4L120,179.3L120.5,178.4L120,178L119.3,178.2L118.5,178.6L117.9,179.2L116.4,182.3L115.8,184L116.9,185.4L119.8,187.4L120.3,187.9L120.4,188.7L120,189.6L119.2,190L116,190.7L113.2,191.9L112.4,193.2L109.9,198.1L107.9,201.5L105,202.7L101.9,201.6L101.1,200.5L100.5,199L99.3,197.7L98.3,196.3L97.7,194.6L97.7,191.8L97.3,190.2L97.7,189.7L99.4,188.7L100,188.1L101,186.8L101.3,186.1L101.4,185L100.6,184.4L98.5,184.4L96.5,184.8L95.1,184.3L93.2,183L92.6,182.7L90.6,182.6L89.2,182.8L87.7,183.3L86.2,183.5L85.7,183.7L84,185.4L82.6,186.4L81.4,186.9L78.9,187.1L77.6,187.4L76.2,187.9L75.8,187.9L74.4,188.6L72.8,189.3L71.9,189.9L70.3,189.5L67.2,190.7L65.6,190.8L64,190.2L62.6,189.2L61.2,189.6L60.2,191.1L59.8,194.2L59.2,195.5L59,197.2L58.3,196.9L54.1,194L53.8,193.9L50.3,194.4L49.4,194.6L48.4,195.2L47.2,195.5L46.1,195.1L45.1,194.3L44.1,194.6L43.1,195.1L42.7,190.6L42.9,190L43.6,189.2L44.2,188.5L45.9,188.3L47.6,188.5L48.7,188.2L49.8,187.3L50.8,186L52.1,185L53.7,184.2L55.3,183.3L56.7,182L58,180.5L59.2,179.5L60.5,178.6L62.5,176.5L65.2,174.1L66.2,172.3L66.8,171.8L69.1,170.9L72.1,170.1L73.6,170.1L75,171.7L75.7,171.5L76.5,171.1L78.1,170.9L79.7,171.1L81.2,171.1L82.8,170.9L85.8,170.4L87.4,169.8L88.9,169L94.4,168.4L98.3,167.1L98.8,167.2L99.4,167.5L99.5,168.5L99,169.6L99.5,170.2L100.2,170.6L103.8,170.8L104.8,171L106.3,170.3L107.7,169.3L109.1,168.1L110.2,166.8L109.2,165.1L109,163.2L109.8,161.2L110.9,159.5L112.3,158.4L113.6,157.3L116.1,153.9L118,151.1L118.6,147.7L118.3,143.7L119.8,140.7L121.4,140.2L124.5,138.8L126,138.4L126.3,139L126.2,139.8L123.9,142.3L122.5,143.4L121.7,143.7L120.9,144.2L120.6,145L121.8,146.5L122.1,147.6L122,148.6L122.1,149.6L123.5,150.6L125.1,150.9L125.7,150.9L126.3,150.7L128.1,148.2L128.5,147.7L133.7,145.9L136.3,144.5L137.7,144.1L139,143.4L141.9,140.6L143,139.3L144,137.8L144.8,136.1L145.4,134.3L146.3,133.2L151,130.5L152.5,129L153,128.3L153.6,126.2L154,124L154.5,122.3L155.3,120.7L156.3,119.1L157.5,117.6L158.2,116L159.2,112.3L159.6,110.2L159.9,109.5L160.5,108.9L160.9,108.1L161.2,107.2L161.3,106.3L161.6,103.6L161.4,101.5L160.7,99.7L160,99.2L159.3,99.2L158.3,99.3L157.4,98.6L157.6,98L158.5,97.9L159.1,97.5L159.5,96.9L160.4,95L160.9,92.9L160.9,92L160.3,90.3L159.8,88.2L159.8,87.1L160.3,85.8L161.1,84.8L161.9,84.6L162.6,84.5L163.3,84.1L164,83.5L164.4,82.9L165,81.1L165.2,80.2L164.8,77.5L165.2,76.8L165.7,76.3L166.5,76.6L167.2,76.7L168.1,76.6L168.8,76.9L169,77.6L169.5,82.1L169.8,82.7L170.4,83.2L171.1,83.1L171.7,82.4L172.1,81.4L172.9,81.3L175.2,82.3L176.1,81.6L176.6,80.5L177.1,78.5L176.9,76.7L176.3,76.1L175.7,76.2L175.2,76.7L174.6,76.9L171.1,77.9L171.1,75.9L171.9,72.9L172.3,72L172.9,71.6L174.4,72.1L175,72.4Z"/>
-            <circle cx="156.7" cy="168.2" r="5" fill="#002a4d"/>
-            <circle class="pulse" cx="156.7" cy="168.2" r="5"/>
+            <g class="city"><circle class="pulse" cx="156.7" cy="168.2" r="5" style="animation-delay:0s"/><circle class="pin" cx="156.7" cy="168.2" r="4.5"/><rect class="tag" x="166.7" y="159.2" width="40" height="18" rx="9"/><text class="tagt" x="186.7" y="171.79999999999998" text-anchor="middle" lang="ja">東京</text></g><g class="city"><circle class="pulse" cx="178.2" cy="44.3" r="5" style="animation-delay:0.5s"/><circle class="pin" cx="178.2" cy="44.3" r="4.5"/><rect class="tag" x="188.2" y="35.3" width="40" height="18" rx="9"/><text class="tagt" x="208.2" y="47.9" text-anchor="middle" lang="ja">札幌</text></g><g class="city"><circle class="pulse" cx="102.5" cy="183.9" r="5" style="animation-delay:1s"/><circle class="pin" cx="102.5" cy="183.9" r="4.5"/><rect class="tag" x="82.5" y="192.9" width="40" height="18" rx="9"/><text class="tagt" x="102.5" y="205.5" text-anchor="middle" lang="ja">大阪</text></g><g class="city"><circle class="pulse" cx="36.4" cy="201.1" r="5" style="animation-delay:1.5s"/><circle class="pin" cx="36.4" cy="201.1" r="4.5"/><rect class="tag" x="-15.600000000000001" y="192.1" width="40" height="18" rx="9"/><text class="tagt" x="4.399999999999999" y="204.7" text-anchor="middle" lang="ja">福岡</text></g>
           </g>
           <g class="ring">
-            <text><textPath href="images/LOGO NEXA-NO BACKGROUND.png" startOffset="60" textLength="420" lengthAdjust="spacing">ANDALAN TALENTA NEXA</textPath></text>
-            <text><textPath href="images/LOGO NEXA-NO BACKGROUND.png" startOffset="600" textLength="420" lengthAdjust="spacing">ANDALAN TALENTA NEXA</textPath></text>
+            <text><textPath href="#rp" startOffset="60" textLength="420" lengthAdjust="spacing">ANDALAN TALENTA NEXA</textPath></text>
+            <text><textPath href="#rp" startOffset="600" textLength="420" lengthAdjust="spacing">ANDALAN TALENTA NEXA</textPath></text>
             <g transform="rotate(-90 20 200)"><rect x="-6" y="174" width="52" height="52" rx="12" fill="#fff"/><image data-logo-svg x="1" y="181" width="38" height="38" preserveAspectRatio="xMidYMid meet"/></g>
             <g transform="rotate(90 380 200)"><rect x="354" y="174" width="52" height="52" rx="12" fill="#fff"/><image data-logo-svg x="361" y="181" width="38" height="38" preserveAspectRatio="xMidYMid meet"/></g>
           </g>
@@ -368,6 +403,16 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
   <h2 data-t="bTitle">Kabar kelulusan</h2>
   <p class="sub" data-t="bSub">Selamat untuk peserta yang berhasil melangkah ke Jepang.</p>
   <div class="nGrid" id="beritaList"></div>
+</section>
+
+<section class="wrap" id="mitra">
+  <h2 data-t="mtTitle">Mitra dan lulusan</h2>
+  <p class="sub" data-t="mtSub">Peserta yang sudah melangkah ke Jepang dan perusahaan yang menerima mereka.</p>
+  <div class="stats" id="statList"></div>
+  <h3 class="subh" data-t="mtCoH">Perusahaan mitra</h3>
+  <div class="coGrid" id="mitraList"></div>
+  <h3 class="subh" data-t="mtStH">Daftar siswa lulus</h3>
+  <div class="stList" id="siswaList"></div>
 </section>
 
 <section class="wrap" id="prosedur">
@@ -513,7 +558,7 @@ var JA = {
   h1:"日本語を学び、JFTに合格し、<em>マッチングまでサポート</em>",
   heroP:"LPK Andalan Talenta Nexaは、基礎学習から日本企業との出会いまで、あなたをサポートします。",
   heroB1:"申込フォームに記入", heroB2:"プログラムを見る",
-  eyebrow:"日本語LPK · ボヨラリ",
+  eyebrow:"ボヨラリ、中部ジャワ州",
   hf1b:"3か月", hf1s:"日本語研修",
   hf2b:"第1〜25課", hf2s:"日本語教材",
   hf3b:"10段階", hf3s:"出発まで",
@@ -567,7 +612,12 @@ var JA = {
   kSub:"プログラムやお申し込みについてご質問がありますか?直接お越しいただくか、横の連絡先までご連絡ください。",
   kB1:"WhatsAppでチャット", kB2:"メールを送る",
   kAddr:"住所", kWa:"WhatsApp / 電話", kMail:"メール", kHrs:"営業時間",
-  kHrsV:"月〜金 8:00〜16:00(WIB)"
+  kHrsV:"月〜金 8:00〜16:00(WIB)",
+  nPartner:"提携企業",
+  mtTitle:"提携企業と合格者",
+  mtSub:"日本へ一歩を踏み出した参加者と、受け入れ企業の一覧です。",
+  mtCoH:"提携企業",
+  mtStH:"合格者一覧"
 };
 function setLang(l){
   document.querySelectorAll("[data-t]").forEach(function(el){
@@ -619,6 +669,56 @@ function renderBerita(){
 }
 renderBerita();
 document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",renderBerita);});
+/* ===== MITRA DAN LULUSAN =====
+   Angka di atas dihitung OTOMATIS dari dua daftar ini, jadi tidak ada angka karangan.
+   Tambah siswa: salin satu blok { } di SISWA. Tambah perusahaan: salin satu blok { } di MITRA.
+   company di SISWA harus sama persis dengan name di MITRA.
+   logo = file logo perusahaan (opsional), contoh "images/logo-abc.png". Kosong = huruf awal. */
+var MITRA = [
+  { name:"Perusahaan di Shizuoka", place:"Shizuoka", placeJa:"静岡", field:"Permesinan", fieldJa:"機械加工", logo:"" }
+];
+var SISWA = [
+  { name:"Rohman Juli Andika", company:"Perusahaan di Shizuoka", year:2026 }
+];
+var MTXT = {
+  id:{siswa:"Siswa lulus", mitra:"Perusahaan mitra", pref:"Prefektur penempatan", unit:"siswa", empty:"Belum ada data.", cName:"Nama", cCo:"Perusahaan", cField:"Bidang", cYear:"Tahun"},
+  ja:{siswa:"合格者数", mitra:"提携企業数", pref:"配属都道府県", unit:"名", empty:"データはまだありません。", cName:"氏名", cCo:"企業", cField:"職種", cYear:"年"}
+};
+function renderMitra(){
+  var l=document.documentElement.lang==="ja"?"ja":"id", t=MTXT[l];
+  var places={}; MITRA.forEach(function(m){places[m.place]=1;});
+  var st=document.getElementById("statList");
+  if(st) st.innerHTML=[[SISWA.length,t.siswa],[MITRA.length,t.mitra],[Object.keys(places).length,t.pref]].map(function(x){
+    return '<div class="stat"><b class="cnt" data-to="'+x[0]+'">'+x[0]+'</b><span>'+x[1]+'</span></div>';}).join("");
+  var ml=document.getElementById("mitraList");
+  if(ml) ml.innerHTML=MITRA.map(function(m){
+    var n=SISWA.filter(function(s){return s.company===m.name;}).length;
+    var pl=(l==="ja"&&m.placeJa)||m.place, fd=(l==="ja"&&m.fieldJa)||m.field;
+    var logo=m.logo?'<img src="'+bEsc(m.logo)+'" alt="'+bEsc(m.name)+'" loading="lazy">':bEsc((m.name||"?").charAt(0).toUpperCase());
+    return '<div class="coCard"><div class="coLogo">'+logo+'</div><div><h4>'+bEsc(m.name)+'</h4><p>'+bEsc(pl)+' · '+bEsc(fd)+'</p><span class="coCnt">'+n+' '+t.unit+'</span></div></div>';
+  }).join("")||'<p>'+t.empty+'</p>';
+  var sl=document.getElementById("siswaList");
+  if(sl) sl.innerHTML=SISWA.length?('<div class="stRow head"><div>#</div><div>'+t.cName+'</div><div>'+t.cCo+'</div><div>'+t.cField+'</div><div>'+t.cYear+'</div></div>'+
+    SISWA.map(function(s,i){
+      var m=MITRA.filter(function(x){return x.name===s.company;})[0]||{};
+      var fd=(l==="ja"&&m.fieldJa)||m.field||"-";
+      return '<div class="stRow"><div class="no">'+(i+1)+'</div><div class="nm">'+bEsc(s.name)+'</div><div>'+bEsc(s.company)+'</div><div>'+bEsc(fd)+'</div><div>'+bEsc(s.year)+'</div></div>';
+    }).join("")):'<p>'+t.empty+'</p>';
+  countUp();
+}
+function countUp(){
+  var els=document.querySelectorAll(".cnt");
+  if(!("IntersectionObserver" in window)||window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting) return; io.unobserve(e.target);
+    var to=+e.target.getAttribute("data-to")||0, t0=null;
+    function step(ts){ if(!t0) t0=ts; var p=Math.min((ts-t0)/900,1); e.target.textContent=Math.round(to*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(step); }
+    e.target.textContent=0; requestAnimationFrame(step);
+  });},{threshold:.4});
+  els.forEach(function(el){io.observe(el);});
+}
+renderMitra();
+document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",renderMitra);});
 </script>
 
 </body>
