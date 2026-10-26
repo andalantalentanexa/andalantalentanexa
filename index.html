@@ -314,6 +314,7 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 <section class="wrap" id="berita">
   <h2 data-t="bTitle">Kabar kelulusan</h2>
   <p class="sub" data-t="bSub">Selamat untuk peserta yang berhasil melangkah ke Jepang.</p>
+  <div style="margin-bottom:22px"><button type="button" class="btn btn-navy" id="aOpen" data-t="bAdd">+ Tambahkan</button></div>
   <div class="adm" id="adminBox" hidden>
     <h3>Admin kabar kelulusan</h3>
     <div id="admLogin">
@@ -506,7 +507,7 @@ var JA = {
   s3h:"練習してJFT合格", s3p:"問題練習と模擬試験で理解を深めます。",
   s4h:"就職準備", s4p:"書類、職場マナー、面接を準備します。",
   s5h:"マッチング", s5p:"企業との出会いをサポートします。",
-  bTitle:"合格のお知らせ",
+  bAdd:"+ 追加する", bTitle:"合格のお知らせ",
   bSub:"日本への一歩を踏み出した参加者の皆さん、おめでとうございます。",
   prTitle:"日本への実習手続き",
   prSub:"募集から日本への出発までの10段階。",
@@ -581,14 +582,18 @@ renderBerita();
 document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",renderBerita);});
 
 /* ===== LOGIN ADMIN, POSTING FOTO, HAPUS (Supabase) =====
-   Isi 2 baris di bawah dari Supabase: Project Settings > API */
+   Isi 2 baris di bawah dari Supabase: Project Settings > API. Tombol "+ Tambahkan" terlihat semua orang, tapi posting butuh login staf. */
 var SB_URL="ISI_URL_SUPABASE", SB_KEY="ISI_ANON_KEY", sb=null, isAdmin=false;
 try{ if(window.supabase && SB_URL.indexOf("http")===0) sb=window.supabase.createClient(SB_URL,SB_KEY); }catch(e){}
 
 (async function(){
   var $=function(id){return document.getElementById(id);};
-  function cek(){ $("adminBox").hidden = location.hash !== "#admin"; }
+  function cek(){ if(location.hash==="#admin") $("adminBox").hidden=false; }
   cek(); window.addEventListener("hashchange",cek);
+  $("aOpen").addEventListener("click",function(){
+    var h=$("adminBox"); h.hidden=!h.hidden;
+    if(!h.hidden) h.scrollIntoView({behavior:"smooth",block:"nearest"});
+  });
   function hariIni(){ return new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10); }
   $("aDate").value=hariIni();
   function pesan(t){ $("aMsg").textContent=t||""; }
