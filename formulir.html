@@ -578,7 +578,8 @@ async function buildPdf(d){
     /* logo dimuat dalam kotak maks 40 x 26 mm tanpa distorsi */
     var box = fitBox(logo.w, logo.h, 40, 26);
     var lw = box.w, lh = box.h;
-    doc.addImage(logo.data, "PNG", M, 12 + (26 - lh) / 2, lw, lh);
+    var LOGO_OFFSET = 9; /* geser logo ke kanan (mm). Naikkan angka ini kalau mau lebih ke kanan */
+    doc.addImage(logo.data, "PNG", M + LOGO_OFFSET, 12 + (26 - lh) / 2, lw, lh);
     tx = M + lw + 4;
   }
   var cx = (tx + RIGHT) / 2;
