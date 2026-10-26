@@ -202,7 +202,7 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
   <div class="navbar-inner">
     <a href="#beranda" class="brand">
       <span class="brand-logo">
-        <img data-logo alt="images/LOGO NEXA-NO BACKGROUND.png">
+        <img data-logo alt="Logo Andalan Talenta Nexa">
         <span class="shine"></span>
       </span>
       <span class="brand-text"><b>Andalan Talenta Nexa</b><span data-t="brandSub">LPK Bahasa Jepang</span></span>
@@ -319,14 +319,14 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
     <h3>Admin kabar kelulusan</h3>
     <div id="admLogin">
       <div class="admGrid">
-        <div><label for="aMail">Email</label><input type="email" id="aMail" autocomplete="username"></div>
+        <div><label for="aMail">Email</label><input type="email" id="aMail" autocomplete="username" value="nexaindonesia01@gmail.com"></div>
         <div><label for="aPass">Password</label><input type="password" id="aPass" autocomplete="current-password"></div>
       </div>
       <button type="button" class="btn btn-navy" id="aLogin">Masuk</button>
     </div>
     <div id="admPost" hidden>
       <div class="admGrid">
-        <div><label for="aImg">Foto poster</label><input type="file" id="aImg" accept="images/ROHMAN JULI ANDIKA.png"></div>
+        <div><label for="aImg">Foto poster</label><input type="file" id="aImg" accept="image/*"></div>
         <div><label for="aName">Nama peserta</label><input type="text" id="aName" placeholder="Rohman Juli Andika"></div>
         <div><label for="aDet">Bidang dan lokasi</label><input type="text" id="aDet" placeholder="Permesinan, Shizuoka"></div>
         <div><label for="aType">Jenis kabar</label><select id="aType"><option value="lulus">Lolos Mensetsu</option><option value="jft">Lulus JFT</option><option value="berangkat">Berangkat ke Jepang</option></select></div>
@@ -445,9 +445,9 @@ footer{margin-top:96px;text-align:center;color:var(--soft);font-size:.85rem;padd
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 /* Logo lambang N (navbar dan watermark hero), tanpa tulisan perusahaan.
-   PENTING: ganti teks di bawah dengan isi baris "var LOGO_N = ..." dari index.html lama kamu. */
-var LOGO_N = "GANTI_DENGAN_BASE64_LOGO_LAMA";
-if(LOGO_N.indexOf("data:") === 0){
+   LOGO_N = lokasi file logo (boleh juga data base64). Spasi di nama file ditulis %20. */
+var LOGO_N = "images/LOGO%20NEXA-NO%20BACKGROUND.png";
+if(LOGO_N){
   document.querySelectorAll("[data-logo]").forEach(function(i){ i.src = LOGO_N; });
   (function(){
     var bl = document.querySelector(".brand-logo"), sh = bl && bl.querySelector(".shine");
