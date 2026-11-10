@@ -670,10 +670,11 @@ function renderBerita(){
 renderBerita();
 document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",renderBerita);});
 /* ===== MITRA DAN LULUSAN =====
-   Angka di atas dihitung OTOMATIS dari dua daftar ini, jadi tidak ada angka karangan.
+   Angka "Total siswa", "Lulus job", dan "Mitra LPK" diisi manual di ANGKA.
    Tambah siswa: salin satu blok { } di SISWA. Tambah perusahaan: salin satu blok { } di MITRA.
    company di SISWA harus sama persis dengan name di MITRA.
    logo = file logo perusahaan (opsional), contoh "images/logo-abc.png". Kosong = huruf awal. */
+var ANGKA = { belajar: 17, mensetsu: 15, mitra: 2 };  /* belajar = total siswa, mensetsu = lulus job, mitra = mitra LPK */
 var MITRA = [
   { name:"Perusahaan di Shizuoka", place:"Shizuoka", placeJa:"静岡", field:"Permesinan", fieldJa:"機械加工", logo:"" }
 ];
@@ -681,14 +682,13 @@ var SISWA = [
   { name:"Rohman Juli Andika", company:"Perusahaan di Shizuoka", year:2026 }
 ];
 var MTXT = {
-  id:{siswa:"Siswa lulus", mitra:"Perusahaan mitra", pref:"Prefektur penempatan", unit:"siswa", empty:"Belum ada data.", cName:"Nama", cCo:"Perusahaan", cField:"Bidang", cYear:"Tahun"},
-  ja:{siswa:"合格者数", mitra:"提携企業数", pref:"配属都道府県", unit:"名", empty:"データはまだありません。", cName:"氏名", cCo:"企業", cField:"職種", cYear:"年"}
+  id:{learn:"Total siswa", mensetsu:"Lulus job", siswa:"Siswa lulus", mitra:"Perusahaan mitra", mitraLpk:"Mitra LPK", pref:"Prefektur penempatan", unit:"siswa", empty:"Belum ada data.", cName:"Nama", cCo:"Perusahaan", cField:"Bidang", cYear:"Tahun"},
+  ja:{learn:"総生徒数", mensetsu:"内定者数", siswa:"合格者数", mitra:"提携企業数", mitraLpk:"提携LPK数", pref:"配属都道府県", unit:"名", empty:"データはまだありません。", cName:"氏名", cCo:"企業", cField:"職種", cYear:"年"}
 };
 function renderMitra(){
   var l=document.documentElement.lang==="ja"?"ja":"id", t=MTXT[l];
-  var places={}; MITRA.forEach(function(m){places[m.place]=1;});
   var st=document.getElementById("statList");
-  if(st) st.innerHTML=[[SISWA.length,t.siswa],[MITRA.length,t.mitra],[Object.keys(places).length,t.pref]].map(function(x){
+  if(st) st.innerHTML=[[ANGKA.belajar,t.learn],[ANGKA.mensetsu,t.mensetsu],[ANGKA.mitra,t.mitraLpk]].map(function(x){
     return '<div class="stat"><b class="cnt" data-to="'+x[0]+'">'+x[0]+'</b><span>'+x[1]+'</span></div>';}).join("");
   var ml=document.getElementById("mitraList");
   if(ml) ml.innerHTML=MITRA.map(function(m){
